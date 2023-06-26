@@ -8,19 +8,40 @@
 import SwiftUI
 
 struct MainTaskList: View {
+    @StateObject var vm = MainTaskListViewModel(workday: Workday.sampleData[0])
+    
     var body: some View {
         List {
-            Text("Stuff")
-            Text("Stuff")
-            Text("Stuff")
-            Text("Stuff")
+            ForEach(Task.sampleData, id: \.self) { task in
+                TaskItem(task: task)
+                    .listRowSeparatorTint(task.status.color)
+            }
+            .listRowSeparator(.visible)
         }
-        .listStyle(.inset(alternatesRowBackgrounds: true))
+        .listStyle(.plain)
+        .navigationTitle("Tasks")
             .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Button("Button here") {
-                        
+                ToolbarItemGroup(placement: .secondaryAction) {
+                    Button {
+                        // create
+                    } label: {
+                        Image(systemName: "square.and.pencil")
                     }
+                    Spacer()
+                    HStack {
+                        Button {
+                            // edit
+                        } label: {
+                            Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                        }
+                        Button {
+                            // delete
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                    }
+                    Spacer(minLength: 500)
+                    ShareLink(item: "bogus")
                 }
             }
     }

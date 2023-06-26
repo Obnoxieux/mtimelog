@@ -16,7 +16,7 @@ struct ContentView: View {
             MainTaskList()
                 .navigationSplitViewColumnWidth(min: 210, ideal: 500, max: 600)
         } detail: {
-            TaskDetail()
+            TaskDetail(task: Task.sampleData[1])
                 .navigationSplitViewColumnWidth(min: 200, ideal: 500, max: 600)
         }
     }
