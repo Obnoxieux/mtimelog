@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct NavigationBar: View {
-    @State private var date = Date.now
+    @StateObject var vm = NavigationBarViewModel()
+    @State var showPopover = false
     
     var body: some View {
         List {
             Section(
                 header: Text("Calendar Week 4")
             ) {
-                Text("23-10-02")
-                Text("23-10-03")
-                Text("23-10-04")
-                Text("23-10-05")
+                ForEach(vm.workdays, id: \.self) { workday in
+                    NavigationLink(destination: MainTaskList(workday: workday), label: {
+                        Text(workday.date, format: .dateTime.day().month().year())
+                    })
+                }
             }
             Section {
-                DatePicker("Please enter a date", selection: $date, displayedComponents: .date)
-                    .labelsHidden()
+                Button(action: {
+                    showPopover = true
+                }, label: {
+                    Label("New workday", systemImage: "plus")
+                })
+                .buttonStyle(.plain)
             }
         }
         .listStyle(.sidebar)
         .navigationTitle("Workdays")
+        .popover(isPresented: $showPopover) {
+            AddNewWorkdaySheet(vm: vm)
+        }
     }
 }
 

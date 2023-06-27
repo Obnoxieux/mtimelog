@@ -13,10 +13,10 @@ struct ContentView: View {
             NavigationBar()
                 .navigationSplitViewColumnWidth(min: 120, ideal: 200, max: 200)
         } content: {
-            MainTaskList()
+            Text("No working day selected")
                 .navigationSplitViewColumnWidth(min: 210, ideal: 500, max: 600)
         } detail: {
-            TaskDetail(task: Task.sampleData[1])
+            Text("No Task selected")
                 .navigationSplitViewColumnWidth(min: 200, ideal: 500, max: 600)
         }
     }

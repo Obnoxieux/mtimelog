@@ -10,7 +10,7 @@ import Foundation
 struct Workday: Hashable, Codable, Identifiable {
     var id = UUID()
     var date: Date
-    var tasks: [Task]
+    var tasks: [Task] = []
 }
 
 extension Workday {

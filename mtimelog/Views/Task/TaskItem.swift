@@ -21,11 +21,11 @@ struct TaskItem: View {
                 Label(task.getDuration(), systemImage: "hourglass")
             }
             Label(task.description, systemImage: "list.bullet.clipboard")
+                .lineLimit(2)
             Label(task.status.rawValue, systemImage: "info.square")
                 .foregroundColor(task.status.color)
         }
-        .accentColor(.blue)
-        .font(.caption)
+        .font(.callout)
         .padding(5)
     }
 }

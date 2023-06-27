@@ -8,13 +8,25 @@
 import SwiftUI
 
 struct MainTaskList: View {
-    @StateObject var vm = MainTaskListViewModel(workday: Workday.sampleData[0])
+    var workday: Workday
     
     var body: some View {
         List {
+            Text(workday.date.debugDescription)
+            ForEach(workday.tasks, id: \.self) { task in
+                NavigationLink(destination: TaskDetail(task: task), label: {
+                    TaskItem(task: task)
+                        .listRowSeparatorTint(task.status.color)
+                })
+            }
+            .listRowSeparator(.visible)
+            
+            // DEBUG/DESIGN SECTION WITH STATIC DATA
             ForEach(Task.sampleData, id: \.self) { task in
-                TaskItem(task: task)
-                    .listRowSeparatorTint(task.status.color)
+                NavigationLink(destination: TaskDetail(task: task), label: {
+                    TaskItem(task: task)
+                        .listRowSeparatorTint(task.status.color)
+                })
             }
             .listRowSeparator(.visible)
         }
@@ -25,7 +37,7 @@ struct MainTaskList: View {
                     Button {
                         // create
                     } label: {
-                        Image(systemName: "square.and.pencil")
+                        Image(systemName: "plus")
                     }
                     Spacer()
                     HStack {
@@ -49,6 +61,6 @@ struct MainTaskList: View {
 
 struct MainTaskList_Previews: PreviewProvider {
     static var previews: some View {
-        MainTaskList()
+        MainTaskList(workday: Workday.sampleData[0])
     }
 }
