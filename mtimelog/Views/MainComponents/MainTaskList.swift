@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct MainTaskList: View {
+    @State var showAddPopover = false
+    
     var workday: Workday
     
     var body: some View {
@@ -35,9 +37,12 @@ struct MainTaskList: View {
             .toolbar {
                 ToolbarItemGroup(placement: .secondaryAction) {
                     Button {
-                        // create
+                        showAddPopover = true
                     } label: {
                         Image(systemName: "plus")
+                    }
+                    .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
+                        AddTaskPopover()
                     }
                     Spacer()
                     HStack {

@@ -29,13 +29,13 @@ struct NavigationBar: View {
                     Label("New workday", systemImage: "plus")
                 })
                 .buttonStyle(.plain)
+                .popover(isPresented: $showPopover) {
+                    AddNewWorkdaySheet(vm: vm)
+                }
             }
         }
         .listStyle(.sidebar)
         .navigationTitle("Workdays")
-        .popover(isPresented: $showPopover) {
-            AddNewWorkdaySheet(vm: vm)
-        }
     }
 }
 
