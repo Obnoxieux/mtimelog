@@ -12,31 +12,60 @@ struct TaskDetail: View {
     
     var body: some View {
         List {
-            Label(task.projectID, systemImage: "tray.full")
-                .bold()
-                .labelStyle(.titleOnly)
-            Label(task.description ?? "No description provided", systemImage: "list.bullet.clipboard")
-            Divider()
-            if let endTime = task.endTime {
-                HStack {
-                    Image(systemName: "clock")
-                        .foregroundColor(.accentColor)
-                    Text(task.startTime...endTime)
+            switch task.status {
+                
+            case .ongoing:
+                TaskDetailMainInfo(task: task)
+                Divider()
+                VStack(spacing: 10) {
+                    HStack {
+                        Text("Started: ") + Text(task.startTime, style: .time).font(.headline)
+                        Spacer()
+                        Text(task.startTime, style: .timer)
+                            .font(.headline)
+                    }
+                    
+                    Gauge(value: 0.3) {
+                        Text("% of Workday")
+                    }
                 }
+                Divider()
+                Label(task.status.rawValue, systemImage: "info.square")
+                    .foregroundColor(task.status.color)
+                Divider()
+                HStack {
+                    Spacer()
+                    Button("Finish Task") {
+                        //
+                    }
+                    .buttonStyle(.borderedProminent)
+                    Spacer()
+                }
+                
+            default:
+                TaskDetailMainInfo(task: task)
+                Divider()
+                if let endTime = task.endTime {
+                    HStack {
+                        Image(systemName: "clock")
+                            .foregroundColor(.accentColor)
+                        Text(task.startTime...endTime)
+                    }
+                    Label(task.getDuration(), systemImage: "hourglass")
+                    Divider()
+                }
+                if let comment = task.statusComment {
+                    Label(comment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
+                }
+                Label(task.status.rawValue, systemImage: "info.square")
+                    .foregroundColor(task.status.color)
             }
-            Label(task.getDuration(), systemImage: "hourglass")
-            Divider()
-            if let comment = task.statusComment {
-                Label(comment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
-            }
-            Label(task.status.rawValue, systemImage: "info.square")
-                .foregroundColor(task.status.color)
         }
     }
 }
 
 struct TaskDetail_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetail(task: Task.sampleData[0])
+        TaskDetail(task: Task.sampleData[1])
     }
 }

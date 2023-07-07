@@ -29,6 +29,7 @@ struct Task: Hashable, Codable, Identifiable {
 extension Task {
     static let sampleData = [
         Task(projectID: "ABC-010-4857", description: "[35837] Do this complex task => Waiting for feedback and do a whole lot, mostly producing text to fill this little box and be realistic", statusComment: "Waiting for feedback", status: .inProgress, startTime: Date(), endTime: Date().addingTimeInterval(10000)),
+        Task(projectID: "ABC-010-4857", description: "[35837] Do this complex task => Waiting for feedback and do a whole lot, mostly producing text to fill this little box and be realistic", statusComment: "Waiting for feedback", status: .ongoing, startTime: Date(), endTime: Date().addingTimeInterval(10000)),
         Task(projectID: "54321", description: "Review code changes", statusComment: "Pending review", status: .inProgress, startTime: Date(), endTime: Date()),
         Task(projectID: "98765", description: "Test new feature", statusComment: "Test cases passed", status: .completed, startTime: Date(), endTime: Date()),
         Task(projectID: "24680", description: "Debug issue #123", statusComment: "Investigating the root cause", status: .inProgress, startTime: Date(), endTime: Date()),
