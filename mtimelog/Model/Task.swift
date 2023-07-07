@@ -10,21 +10,19 @@ import Foundation
 struct Task: Hashable, Codable, Identifiable {
     var id = UUID()
     var projectID: String
-    var description: String
-    var statusComment: String
+    var description: String?
+    var statusComment: String?
     var status: TaskStatus
     var startTime: Date
-    var endTime: Date
+    var endTime: Date?
     
     func getDuration() -> String {
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.day, .hour, .minute]
         formatter.unitsStyle = .short
             
-        let duration = endTime.timeIntervalSince(startTime)
-        let formattedDuration = formatter.string(from: duration)!
-        
-        return formattedDuration
+        guard let duration = endTime?.timeIntervalSince(startTime) else { return "..." }
+        return formatter.string(from: duration)!
     }
 }
 

@@ -15,16 +15,20 @@ struct TaskDetail: View {
             Label(task.projectID, systemImage: "tray.full")
                 .bold()
                 .labelStyle(.titleOnly)
-            Label(task.description, systemImage: "list.bullet.clipboard")
+            Label(task.description ?? "No description provided", systemImage: "list.bullet.clipboard")
             Divider()
-            HStack {
-                Image(systemName: "clock")
-                    .foregroundColor(.accentColor)
-                Text(task.startTime...task.endTime)
+            if let endTime = task.endTime {
+                HStack {
+                    Image(systemName: "clock")
+                        .foregroundColor(.accentColor)
+                    Text(task.startTime...endTime)
+                }
             }
             Label(task.getDuration(), systemImage: "hourglass")
             Divider()
-            Label(task.statusComment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
+            if let comment = task.statusComment {
+                Label(comment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
+            }
             Label(task.status.rawValue, systemImage: "info.square")
                 .foregroundColor(task.status.color)
         }
