@@ -10,7 +10,9 @@ Eine äquivalente App für macOS ist dem Ersteller nicht bekannt. Es gibt auf de
 
 ## Zielsetzung
 
-Es soll eine Applikation programmiert werden, die sich im Stil, minimalistischem Design und Funktionsumfang an *gtimelog* anlehnt, ohne eine reine Portierung zu sein. Die App wird nativ ausschließlich für macOS im Framework SwiftUI und der Programmiersprache Swift entwickelt. Die Nutzung soll komplett offline möglich sein, jegliche Synchronisationen von Daten sind optional. 
+Es soll eine Applikation programmiert werden, die sich im Stil, minimalistischem Design und Funktionsumfang an *gtimelog* anlehnt, ohne eine reine Portierung zu sein. Nutzer können ihre täglichen Aufgaben über eine Benutzeroberfläche erstellen, dokumentieren, verwalten, versenden und visualisieren.
+
+Die App wird nativ ausschließlich für macOS im Framework SwiftUI und der Programmiersprache Swift entwickelt. Die Nutzung soll komplett offline möglich sein, jegliche Synchronisationen von Daten sind optional. 
 
 Die Entwicklung soll quelloffen unter der GPL v3 öffentlich zugänglich stattfinden. Die Verteilung an Nutzende findet mittels signierten .dmg-Archiven statt, wenn sinnvoll möglich auch über den Mac App Store.
 
