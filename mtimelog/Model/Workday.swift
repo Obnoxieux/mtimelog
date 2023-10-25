@@ -20,6 +20,10 @@ final class Workday {
         self.date = date
         self.tasks = tasks
     }
+    
+    func addTask(task: Task) {
+        tasks.append(task)
+    }
 }
 
 extension Workday {

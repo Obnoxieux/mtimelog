@@ -14,19 +14,7 @@ struct MainTaskList: View {
     
     var body: some View {
         List {
-            Text(workday.date.debugDescription)
             ForEach(workday.tasks, id: \.self) { task in
-                NavigationLink(destination: TaskDetail(task: task), label: {
-                    TaskItem(task: task)
-                        .listRowSeparatorTint(task.status.color)
-                })
-            }
-            .listRowSeparator(.visible)
-            
-            // DEBUG/DESIGN SECTION WITH STATIC DATA
-            Text("THIS IS SAMPLE DATA")
-                .foregroundStyle(.red)
-            ForEach(Task.sampleData, id: \.self) { task in
                 NavigationLink(destination: TaskDetail(task: task), label: {
                     TaskItem(task: task)
                         .listRowSeparatorTint(task.status.color)
@@ -35,7 +23,7 @@ struct MainTaskList: View {
             .listRowSeparator(.visible)
         }
         .listStyle(.plain)
-        .navigationTitle("Tasks")
+        .navigationTitle("Tasks for \(workday.date.formatted(date: .long, time: .omitted))")
             .toolbar {
                 ToolbarItemGroup(placement: .secondaryAction) {
                     Button {
@@ -44,7 +32,7 @@ struct MainTaskList: View {
                         Image(systemName: "plus")
                     }
                     .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
-                        AddTaskPopover()
+                        AddTaskPopover(workday: workday)
                     }
                     Spacer()
                     HStack {

@@ -9,11 +9,13 @@ import SwiftUI
 
 struct AddTaskPopover: View {
     @Environment(\.dismiss) var dismiss
+    @Bindable var workday: Workday
     
     @State private var projectID = ""
     @State private var description = ""
     @State private var selectedDateOption = DateOption.now
     @State private var time = Date.now
+    
     
     private var formValid: Bool {
         if projectID != "" {
@@ -56,7 +58,7 @@ struct AddTaskPopover: View {
                     dismiss()
                 }
                 Button("Add Task") {
-                    // TODO: things
+                    addNewTask()
                     dismiss()
                 }
                 .disabled(!formValid)
@@ -66,10 +68,20 @@ struct AddTaskPopover: View {
         .formStyle(.columns)
         .padding()
     }
+    
+    func addNewTask() {
+        let task = Task(
+            projectID: projectID,
+            taskDescription: description,
+            status: .ongoing,
+            startTime: time
+        )
+        workday.addTask(task: task)
+    }
 }
 
 struct AddTaskPopover_Previews: PreviewProvider {
     static var previews: some View {
-        AddTaskPopover()
+        AddTaskPopover(workday: Workday.sampleData[0])
     }
 }
