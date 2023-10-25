@@ -6,11 +6,20 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Workday: Hashable, Codable, Identifiable {
+@Model
+final class Workday {
     var id = UUID()
     var date: Date
+    @Relationship(deleteRule: .cascade, inverse: \Task.workday)
     var tasks: [Task] = []
+    
+    init(id: UUID = UUID(), date: Date, tasks: [Task] = []) {
+        self.id = id
+        self.date = date
+        self.tasks = tasks
+    }
 }
 
 extension Workday {
