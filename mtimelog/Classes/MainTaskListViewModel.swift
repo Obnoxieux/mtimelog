@@ -7,12 +7,11 @@
 
 import Foundation
 
-extension MainTaskList {
-    class MainTaskListViewModel: ObservableObject {
-        @Published var workday: Workday
-        
-        init(workday: Workday) {
-            self.workday = workday
-        }
+@available(*, deprecated, message: "switched to MV pattern")
+@Observable class MainTaskListViewModel {
+    var workday: Workday
+    
+    init(workday: Workday) {
+        self.workday = workday
     }
 }

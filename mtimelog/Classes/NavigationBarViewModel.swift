@@ -7,12 +7,11 @@
 
 import Foundation
 
-extension NavigationBar {
-    class NavigationBarViewModel: ObservableObject {
-        @Published var workdays: [Workday] = []
+@available(*, deprecated, message: "switched to MV pattern")
+@Observable class NavigationBarViewModel {
+    var workdays = [Workday]()
+    
+    func addNewWorkday(date: Date) {
         
-        func addNewWorkday(date: Date) {
-            workdays.append(Workday(date: date))
-        }
     }
 }
