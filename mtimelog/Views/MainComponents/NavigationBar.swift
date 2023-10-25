@@ -6,17 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NavigationBar: View {
-    @StateObject var vm = NavigationBarViewModel()
+    @Query var workdays: [Workday]
     @State var showPopover = false
     
     var body: some View {
         List {
             Section(
-                header: Text("Calendar Week 4")
+                header: Text("STATIC: Calendar Week 4")
             ) {
-                ForEach(vm.workdays, id: \.self) { workday in
+                ForEach(workdays, id: \.self) { workday in
                     NavigationLink(destination: MainTaskList(workday: workday), label: {
                         Text(workday.date, format: .dateTime.day().month().year())
                     })
@@ -30,7 +31,7 @@ struct NavigationBar: View {
                 })
                 .buttonStyle(.plain)
                 .popover(isPresented: $showPopover) {
-                    AddNewWorkdaySheet(vm: vm)
+                    AddNewWorkdaySheet()
                 }
             }
         }

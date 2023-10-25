@@ -9,9 +9,9 @@ import SwiftUI
 
 struct AddNewWorkdaySheet: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) private var modelContext
     
     @State private var date = Date.now
-    @ObservedObject var vm: NavigationBar.NavigationBarViewModel
     
     var body: some View {
         Form {
@@ -25,7 +25,7 @@ struct AddNewWorkdaySheet: View {
                     dismiss()
                 }
                 Button("Save") {
-                    vm.addNewWorkday(date: date)
+                    modelContext.insert(Workday(date: date))
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)
@@ -38,6 +38,6 @@ struct AddNewWorkdaySheet: View {
 
 struct AddNewWorkdaySheet_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewWorkdaySheet(vm: NavigationBar.NavigationBarViewModel())
+        AddNewWorkdaySheet()
     }
 }

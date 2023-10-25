@@ -13,5 +13,6 @@ struct mtimelogApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Workday.self)
     }
 }
