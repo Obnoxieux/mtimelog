@@ -14,7 +14,7 @@ struct TaskDetailMainInfo: View {
         Label(task.projectID, systemImage: "tray.full")
             .bold()
             .labelStyle(.titleOnly)
-        Label(task.description ?? "No description provided", systemImage: "list.bullet.clipboard")
+        Label(task.taskDescription ?? "No description provided", systemImage: "list.bullet.clipboard")
     }
 }
 

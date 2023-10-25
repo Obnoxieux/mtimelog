@@ -20,7 +20,7 @@ struct TaskItem: View {
                 Spacer()
                 Label(task.getDuration(), systemImage: "hourglass")
             }
-            Label(task.description ?? "No description provided", systemImage: "list.bullet.clipboard")
+            Label(task.taskDescription ?? "No description provided", systemImage: "list.bullet.clipboard")
                 .lineLimit(2)
             Label(task.status.rawValue, systemImage: "info.square")
                 .foregroundColor(task.status.color)

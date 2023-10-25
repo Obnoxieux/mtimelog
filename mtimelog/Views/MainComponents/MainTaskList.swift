@@ -24,6 +24,8 @@ struct MainTaskList: View {
             .listRowSeparator(.visible)
             
             // DEBUG/DESIGN SECTION WITH STATIC DATA
+            Text("THIS IS SAMPLE DATA")
+                .foregroundStyle(.red)
             ForEach(Task.sampleData, id: \.self) { task in
                 NavigationLink(destination: TaskDetail(task: task), label: {
                     TaskItem(task: task)
