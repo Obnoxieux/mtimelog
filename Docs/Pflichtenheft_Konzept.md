@@ -91,6 +91,6 @@ etc. pp.
 
 Im Einklang mit den Unix-Designprinzipien soll die App folgende Features *nicht* leisten:
 
-#### Kein Projektmanagement
+### Kein Projektmanagement
 
-Es gibt keine Möglichkeiten, Aufgaben tagesübergreifend zu verfolgen oder in einem höheren Detailgrad zu speichern sowie Auswertungen über aufgewendete Zeit durchzuführen
+Es gibt keine Möglichkeiten, Aufgaben tagesübergreifend zu verfolgen oder in einem höheren Detailgrad zu speichern sowie Auswertungen über aufgewendete Zeit durchzuführen.
