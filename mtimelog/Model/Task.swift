@@ -38,11 +38,18 @@ final class Task {
         guard let duration = endTime?.timeIntervalSince(startTime) else { return "..." }
         return formatter.string(from: duration)!
     }
+    
+    func calculatePercentageOfWorkingDay(hoursInWorkingDay: Int) -> Double {
+        let endTime = endTime ?? Date.now
+        let usedTime = endTime.timeIntervalSince(startTime)
+        let maxTime = Double(hoursInWorkingDay) * 3600
+        return usedTime / maxTime
+    }
 }
 
 extension Task {
     static let sampleData = [
-        Task(projectID: "ABC-010-4857", taskDescription: "[35837] Do this complex task => Waiting for feedback and do a whole lot, mostly producing text to fill this little box and be realistic", statusComment: "Waiting for feedback", status: .inProgress, startTime: Date(), endTime: Date().addingTimeInterval(10000)),
+        Task(projectID: "ABC-010-4857", taskDescription: "[35837] Do this complex task => Waiting for feedback and do a whole lot, mostly producing text to fill this little box and be realistic", statusComment: "Waiting for feedback", status: .inProgress, startTime: Date(), endTime: Date().addingTimeInterval(1000)),
         Task(projectID: "ABC-010-4857", taskDescription: "[35837] Do this complex task => Waiting for feedback and do a whole lot, mostly producing text to fill this little box and be realistic", statusComment: "Waiting for feedback", status: .ongoing, startTime: Date(), endTime: Date().addingTimeInterval(10000)),
         Task(projectID: "54321", taskDescription: "Review code changes", statusComment: "Pending review", status: .inProgress, startTime: Date(), endTime: Date()),
         Task(projectID: "98765", taskDescription: "Test new feature", statusComment: "Test cases passed", status: .completed, startTime: Date(), endTime: Date()),
