@@ -12,7 +12,9 @@ Eine äquivalente App für macOS ist dem Ersteller nicht bekannt. Es gibt auf de
 
 Es soll eine Applikation programmiert werden, die sich im Stil, minimalistischem Design und Funktionsumfang an *gtimelog* anlehnt, ohne eine reine Portierung zu sein. Nutzer können ihre täglichen Aufgaben über eine Benutzeroberfläche erstellen, dokumentieren, verwalten, versenden und visualisieren.
 
-Die App wird nativ ausschließlich für macOS im Framework SwiftUI und der Programmiersprache Swift entwickelt. Die Nutzung soll komplett offline möglich sein, jegliche Synchronisationen von Daten sind optional. 
+Die App wird nativ ausschließlich für macOS im Framework SwiftUI und der Programmiersprache Swift entwickelt. Die Nutzung soll komplett offline möglich sein, jegliche Synchronisationen von Daten sind optional.
+
+Die Benutzeroberfläche wird in englischer Sprache umgesetzt.
 
 Die Entwicklung soll quelloffen unter der GPL v3 öffentlich zugänglich stattfinden. Die Verteilung an Nutzende findet mittels signierten .dmg-Archiven statt, wenn sinnvoll möglich auch über den Mac App Store.
 
@@ -66,6 +68,10 @@ Alle von der App erzeugten Daten werden lokal auf dem Gerät gespeichert und sin
 Alle Daten über Arbeitstage und Aufgaben können in einem Plain-Text-Format exportiert werden, um einen Wechsel von Diensten und die Wiederverwendbarkeit des Datenbestandes zu erleichtern.
 
 ## Features Ausbaustadium
+
+### Deutsche Lokalisierung
+
+Die Benutzeroberfläche steht auch auf Deutsch zur Verfügung.
 
 ### Plugin für Ausgabe Report
 
