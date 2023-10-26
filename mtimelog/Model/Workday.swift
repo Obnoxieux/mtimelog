@@ -28,7 +28,7 @@ final class Workday {
 
 extension Workday {
     static let sampleData = [
-        Workday(date: Date(), tasks: []),
+        Workday(date: Date(), tasks: Task.sampleData),
         Workday(date: Date(), tasks: []),
         Workday(date: Date(), tasks: []),
         Workday(date: Date(), tasks: []),

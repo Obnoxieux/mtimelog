@@ -63,7 +63,8 @@ struct AddTaskPopover: View {
             projectID: projectID,
             taskDescription: description,
             status: .ongoing,
-            startTime: time
+            startTime: time,
+            workday: workday
         )
         workday.addTask(task: task)
     }

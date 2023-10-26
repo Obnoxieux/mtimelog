@@ -6,15 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainTaskList: View {
     @State var showAddPopover = false
+    @Query var tasks: [Task]
+    @Bindable var workday: Workday
     
-    var workday: Workday
+    init(workday: Workday) {
+        self.workday = workday
+        let id = workday.id
+        let predicate = #Predicate<Task> { task in
+            task.workday?.id == id
+        }
+        _tasks = Query(filter: predicate, sort: \Task.startTime, animation: .smooth)
+    }
     
     var body: some View {
         List {
-            ForEach(workday.tasks, id: \.self) { task in
+            ForEach(tasks, id: \.self) { task in
                 NavigationLink(destination: TaskDetail(task: task), label: {
                     TaskItem(task: task)
                         .listRowSeparatorTint(task.status.color)
@@ -22,40 +32,26 @@ struct MainTaskList: View {
             }
             .listRowSeparator(.visible)
         }
+        .onDeleteCommand(perform: {
+            //
+        })
         .listStyle(.plain)
         .navigationTitle("Tasks for \(workday.date.formatted(date: .long, time: .omitted))")
-            .toolbar {
-                ToolbarItemGroup(placement: .secondaryAction) {
-                    Button {
-                        showAddPopover = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
-                    .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
-                        AddTaskPopover(workday: workday)
-                    }
-                    Spacer()
-                    HStack {
-                        Button {
-                            // edit
-                        } label: {
-                            Image(systemName: "rectangle.and.pencil.and.ellipsis")
-                        }
-                        Button {
-                            // delete
-                        } label: {
-                            Image(systemName: "trash")
-                        }
-                    }
-                    Spacer(minLength: 500)
-                    ShareLink(item: "bogus")
+        .toolbar {
+            ToolbarItemGroup(placement: .secondaryAction) {
+                Button {
+                    showAddPopover = true
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
+                    AddTaskPopover(workday: workday)
                 }
             }
+        }
     }
 }
 
-struct MainTaskList_Previews: PreviewProvider {
-    static var previews: some View {
-        MainTaskList(workday: Workday.sampleData[0])
-    }
+#Preview {
+    MainTaskList(workday: Workday.sampleData[0])
 }
