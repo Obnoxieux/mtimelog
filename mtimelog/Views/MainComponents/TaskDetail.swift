@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TaskDetail: View {
     @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
+    @State var showFinishSheet = false
+    
     var task: Task
     
     let listPadding: CGFloat = 7
@@ -43,7 +45,7 @@ struct TaskDetail: View {
                 HStack {
                     Spacer()
                     Button("Finish Task") {
-                        //
+                        showFinishSheet = true
                     }
                     .buttonStyle(.borderedProminent)
                     Spacer()
@@ -75,6 +77,9 @@ struct TaskDetail: View {
                     .foregroundColor(task.status.color)
                     .padding(.vertical, listPadding)
             }
+        }
+        .sheet(isPresented: $showFinishSheet) {
+            FinishTaskSheet(task: task)
         }
     }
 }

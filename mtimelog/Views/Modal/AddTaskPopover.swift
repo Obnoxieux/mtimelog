@@ -32,7 +32,7 @@ struct AddTaskPopover: View {
             Text("You can fill out the description later upon finishing the task.")
                 .foregroundColor(.secondary)
                 .padding(.bottom)
-            Picker("Start Time", selection: $selectedDateOption) {
+            Picker("Set Start Time to", selection: $selectedDateOption) {
                 ForEach(DateOption.allCases) { option in
                     Text(option.localizedName)
                         .tag(option)
@@ -40,8 +40,7 @@ struct AddTaskPopover: View {
             }
             .pickerStyle(.inline)
             if selectedDateOption == .select {
-                DatePicker("Please enter a date", selection: $time, displayedComponents: .hourAndMinute)
-                    .labelsHidden()
+                DatePicker("Start Time", selection: $time, displayedComponents: .hourAndMinute)
             }
             HStack {
                 Spacer()

@@ -35,7 +35,7 @@ final class Task {
         formatter.allowedUnits = [.day, .hour, .minute]
         formatter.unitsStyle = .short
             
-        guard let duration = endTime?.timeIntervalSince(startTime) else { return "..." }
+        guard let duration = endTime?.timeIntervalSince(startTime) else { return "TBD" }
         return formatter.string(from: duration)!
     }
     
@@ -44,6 +44,15 @@ final class Task {
         let usedTime = endTime.timeIntervalSince(startTime)
         let maxTime = Double(hoursInWorkingDay) * 3600
         return usedTime / maxTime
+    }
+    
+    func update(projectID: String, taskDescription: String? = nil, statusComment: String? = nil, status: TaskStatus, startTime: Date? = nil, endTime: Date? = nil) {
+        self.projectID = projectID
+        self.taskDescription = taskDescription
+        self.statusComment = statusComment
+        self.status = status
+        self.startTime = startTime ?? self.startTime
+        self.endTime = endTime
     }
 }
 
