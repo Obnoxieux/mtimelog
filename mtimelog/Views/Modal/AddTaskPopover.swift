@@ -25,15 +25,6 @@ struct AddTaskPopover: View {
         }
     }
     
-    enum DateOption: String, Identifiable, CaseIterable {
-        case now
-        case select
-        
-        var displayName: String { rawValue.capitalized }
-        var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue.capitalized) }
-        var id: String { self.rawValue }
-    }
-    
     var body: some View {
         Form {
             TextField("Project Name", text: $projectID)
@@ -65,8 +56,7 @@ struct AddTaskPopover: View {
                 .buttonStyle(.borderedProminent)
             }
         }
-        .formStyle(.columns)
-        .padding()
+        .formStyle(.grouped)
     }
     
     func addNewTask() {

@@ -16,8 +16,9 @@ struct AddNewWorkdaySheet: View {
     var body: some View {
         Form {
             Text("Select the day for which you want to track your time:")
-            DatePicker("Please enter a date", selection: $date, displayedComponents: .date)
-                .labelsHidden()
+                .foregroundStyle(.secondary)
+            DatePicker("Working Day Date", selection: $date, displayedComponents: .date)
+                .datePickerStyle(.graphical)
                 .padding(.vertical, 5)
             HStack {
                 Spacer()
@@ -31,8 +32,7 @@ struct AddNewWorkdaySheet: View {
                 .buttonStyle(.borderedProminent)
             }
         }
-        .formStyle(.columns)
-        .padding()
+        .formStyle(.grouped)
     }
 }
 
