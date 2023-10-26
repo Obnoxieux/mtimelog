@@ -10,6 +10,7 @@ import SwiftUI
 struct TaskDetail: View {
     @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
     @State var showFinishSheet = false
+    @State var showEditSheet = false
     @State var showingDeleteConfirmationDialog = false
     @Environment(\.modelContext) private var modelContext
     
@@ -83,7 +84,10 @@ struct TaskDetail: View {
                 }
             }
             .sheet(isPresented: $showFinishSheet) {
-                FinishTaskSheet(task: task)
+                EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.finish)
+            }
+            .sheet(isPresented: $showEditSheet) {
+                EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.edit)
             }
             .confirmationDialog("Confirm Deletion", isPresented: $showingDeleteConfirmationDialog) {
                 Button("Delete Task", role: .destructive) {
@@ -98,7 +102,7 @@ struct TaskDetail: View {
                 ToolbarItemGroup {
                     Spacer()
                     Button {
-                        // TODO: edit
+                        showEditSheet = true
                     } label: {
                         Image(systemName: "pencil.and.list.clipboard")
                     }

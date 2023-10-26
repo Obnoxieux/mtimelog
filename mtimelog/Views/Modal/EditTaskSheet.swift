@@ -1,5 +1,5 @@
 //
-//  FinishTaskSheet.swift
+//  EditTaskSheet.swift
 //  mtimelog
 //
 //  Created by David Battefeld on 26.10.23.
@@ -7,14 +7,17 @@
 
 import SwiftUI
 
-struct FinishTaskSheet: View {
+struct EditTaskSheet: View {
     @Environment(\.dismiss) var dismiss
     @Bindable var task: Task
+    
+    var mode: EditMode
     
     @State private var projectID = ""
     @State private var description = ""
     @State private var statusComment = ""
     @State private var selectedDateOption = DateOption.now
+    @State private var startTime = Date.now
     @State private var endTime = Date.now
     @State private var status = TaskStatus.completed
     
@@ -24,6 +27,15 @@ struct FinishTaskSheet: View {
         } else {
             return false
         }
+    }
+    
+    enum EditMode: String, Identifiable, CaseIterable {
+        case finish
+        case edit
+        
+        var displayName: String { rawValue.capitalized }
+        var localizedName: LocalizedStringKey { LocalizedStringKey(rawValue.capitalized) }
+        var id: String { self.rawValue }
     }
     
     var body: some View {
@@ -71,21 +83,24 @@ struct FinishTaskSheet: View {
                     .textFieldStyle(.roundedBorder)
             }
             .padding(.vertical, 3)
-            Section(header: Text("Usage Hints")) {
-                Text("Please add remaining data for the finished task. Fields marked with * are mandatory. You can edit everything later as well.")
-                    .foregroundStyle(.secondary)
+            if mode == .finish {
+                Section(header: Text("Usage Hints")) {
+                    Text("Please add remaining data for the finished task. Fields marked with * are mandatory. You can edit everything later as well.")
+                        .foregroundStyle(.secondary)
+                }
             }
             HStack {
                 Spacer()
                 Button("Cancel") {
                     dismiss()
                 }
-                Button("Finish Task") {
+                Button("Save Task") {
                     task.update(
                         projectID: projectID,
                         taskDescription: description,
                         statusComment: statusComment,
                         status: status,
+                        startTime: startTime,
                         endTime: endTime
                     )
                     dismiss()
@@ -96,17 +111,21 @@ struct FinishTaskSheet: View {
             }
             .padding()
         }
+        .frame(maxWidth: 500)
         .navigationTitle("Finish Task in \(task.projectID)")
         .formStyle(.grouped)
-        
         .onAppear {
             projectID = task.projectID
             description = task.taskDescription ?? ""
+            startTime = task.startTime
+            endTime = task.endTime ?? Date.now // TODO: Weiche
+            status = task.status
+            statusComment = task.statusComment ?? ""
         }
     }
 }
 
 #Preview {
-    FinishTaskSheet(task: Task.sampleData[2])
+    EditTaskSheet(task: Task.sampleData[2], mode: EditTaskSheet.EditMode.finish)
         .frame(height: 700)
 }
