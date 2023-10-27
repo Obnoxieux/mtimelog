@@ -56,17 +56,25 @@ struct EditTaskSheet: View {
             }
             .padding(.vertical, 3)
             Section(header: Text("Time")) {
-                LabeledContent("Start Time") {
-                    Text(task.startTime, format: .dateTime.hour().minute())
-                }
-                Picker("Set End Time to", selection: $selectedDateOption) {
-                    ForEach(DateOption.allCases) { option in
-                        Text(option.localizedName)
-                            .tag(option)
+                if mode == .edit {
+                        DatePicker("Start Time*", selection: $startTime, displayedComponents: .hourAndMinute)
+                        .datePickerStyle(.compact)
+                } else {
+                    LabeledContent("Start Time") {
+                        Text(task.startTime, format: .dateTime.hour().minute())
                     }
                 }
-                .pickerStyle(.inline)
-                if selectedDateOption == .select {
+                if mode == .finish {
+                    Picker("Set End Time to", selection: $selectedDateOption) {
+                        ForEach(DateOption.allCases) { option in
+                            Text(option.localizedName)
+                                .tag(option)
+                        }
+                    }
+                    .pickerStyle(.inline)
+                }
+                
+                if selectedDateOption == .select || mode == .edit {
                         DatePicker("End Time*", selection: $endTime, displayedComponents: .hourAndMinute)
                         .datePickerStyle(.compact)
                 }
@@ -74,9 +82,16 @@ struct EditTaskSheet: View {
             .padding(.vertical, 3)
             Section(header: Text("Status Details")) {
                 Picker("Status", selection: $status) {
+                    if mode == .edit {
+                        Text("Ongoing").tag(TaskStatus.ongoing)
+                            .foregroundStyle(TaskStatus.ongoing.color)
+                    }
                     Text("Completed").tag(TaskStatus.completed)
+                        .foregroundStyle(TaskStatus.completed.color)
                     Text("Work in Progress").tag(TaskStatus.inProgress)
+                        .foregroundStyle(TaskStatus.inProgress.color)
                     Text("Blocked").tag(TaskStatus.blocked)
+                        .foregroundStyle(TaskStatus.blocked.color)
                 }
                 .pickerStyle(.inline)
                 TextField("Status Comment", text: $statusComment)
@@ -111,18 +126,36 @@ struct EditTaskSheet: View {
             }
             .padding()
         }
-        .frame(maxWidth: 500)
+        .frame(minWidth: 540, maxWidth: 800)
         .navigationTitle("Finish Task in \(task.projectID)")
         .formStyle(.grouped)
+        
         .onAppear {
-            projectID = task.projectID
-            description = task.taskDescription ?? ""
-            startTime = task.startTime
-            endTime = task.endTime ?? Date.now // TODO: Weiche
-            status = task.status
-            statusComment = task.statusComment ?? ""
+            initialiseView()
         }
+        
+        .onChange(of: selectedDateOption, {
+            if selectedDateOption == .now {
+                endTime = Date.now
+            }
+        })
     }
+    
+    func initialiseView() {
+        projectID = task.projectID
+        description = task.taskDescription ?? ""
+        startTime = task.startTime
+        endTime = task.endTime ?? Date.now
+        if mode == .edit {
+            status = task.status
+        }
+        statusComment = task.statusComment ?? ""
+    }
+}
+
+#Preview {
+    EditTaskSheet(task: Task.sampleData[2], mode: EditTaskSheet.EditMode.edit)
+        .frame(height: 700)
 }
 
 #Preview {
