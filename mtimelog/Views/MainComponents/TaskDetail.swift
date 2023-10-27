@@ -104,15 +104,15 @@ struct TaskDetail: View {
                     Button {
                         showEditSheet = true
                     } label: {
-                        Image(systemName: "pencil.and.list.clipboard")
+                        Label("Edit", systemImage: "pencil.and.list.clipboard")
+                            .labelStyle(.titleAndIcon)
                     }
                     Button {
                         showingDeleteConfirmationDialog = true
                     } label: {
-                        Image(systemName: "trash")
+                        Label("Delete", systemImage: "trash")
+                            .labelStyle(.titleAndIcon)
                     }
-                    Spacer()
-                    ShareLink(item: "bogus")
                 }
             }
         } else {

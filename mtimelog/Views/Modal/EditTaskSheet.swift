@@ -46,7 +46,7 @@ struct EditTaskSheet: View {
                         Text(workday.date, format: .dateTime.day().month().year())
                     }
                 }
-                TextField("Project ID*", text: $projectID)
+                TextField("Project ID*", text: $projectID) // TODO: combo Box
                     .textFieldStyle(.roundedBorder)
                 LabeledContent("Description*") {
                         TextEditor(text: $description)

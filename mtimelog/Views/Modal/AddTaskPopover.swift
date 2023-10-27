@@ -27,7 +27,7 @@ struct AddTaskPopover: View {
     
     var body: some View {
         Form {
-            TextField("Project Name", text: $projectID)
+            TextField("Project Name", text: $projectID) //TODO: combo box
             TextField("Description", text: $description)
             Text("You can fill out the description later upon finishing the task.")
                 .foregroundColor(.secondary)

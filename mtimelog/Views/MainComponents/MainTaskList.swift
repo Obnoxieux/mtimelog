@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MainTaskList: View {
+    @AppStorage("showTimesInReport") var showTimesInReport = true
     @State var showAddPopover = false
     @Query var tasks: [Task]
     @Bindable var workday: Workday
@@ -42,7 +43,12 @@ struct MainTaskList: View {
                 Button {
                     showAddPopover = true
                 } label: {
-                    Image(systemName: "plus")
+                    Label("Add Task", systemImage: "plus")
+                        .labelStyle(.titleAndIcon)
+                }
+                ShareLink(item: workday.generateReport(includeDuration: showTimesInReport)) {
+                    Label("Daily Report", systemImage: "square.and.arrow.up")
+                        .labelStyle(.titleAndIcon)
                 }
                 .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
                     AddTaskPopover(workday: workday)

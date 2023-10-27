@@ -24,6 +24,11 @@ final class Workday {
     func addTask(task: Task) {
         tasks.append(task)
     }
+    
+    func generateReport(includeDuration: Bool) -> String {
+        let reportGenerator = ReportGenerator(workday: self, includeDuration: includeDuration)
+        return reportGenerator.generateReport()
+    }
 }
 
 extension Workday {

@@ -9,19 +9,15 @@ import SwiftUI
 
 struct GeneralSettingsTab: View {
     @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
+    @AppStorage("showTimesInReport") var showTimesInReport = true
     
     var body: some View {
-        VStack() {
-            HStack {
-                Text("Hours per Working Day")
-                TextField("Hours per Working Day", value: $hoursInWorkingDay, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(maxWidth: 40)
-                Spacer()
-            }
-            .padding()
-            Spacer()
+        Form {
+            TextField("Hours per Working Day", value: $hoursInWorkingDay, format: .number)
+                .textFieldStyle(.roundedBorder)
+            Toggle("Include task times and duration in report", isOn: $showTimesInReport)
         }
+        .formStyle(.grouped)
     }
 }
 

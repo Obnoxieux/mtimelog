@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA088BD62A4A0D1600A59D7C /* MainTaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA088BD52A4A0D1600A59D7C /* MainTaskListViewModel.swift */; };
 		CA088BD92A4A11C600A59D7C /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA088BD82A4A11C600A59D7C /* TaskItem.swift */; };
 		CA088BDB2A4A127600A59D7C /* TaskStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA088BDA2A4A127600A59D7C /* TaskStatus.swift */; };
 		CA2064BE2A484F44007BACF4 /* mtimelogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2064BD2A484F44007BACF4 /* mtimelogApp.swift */; };
@@ -20,8 +19,8 @@
 		CA2064DA2A485D82007BACF4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2064D92A485D82007BACF4 /* Task.swift */; };
 		CA598E292AE965D2003DD173 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA598E282AE965D2003DD173 /* SettingsWindow.swift */; };
 		CA598E2E2AE96633003DD173 /* GeneralSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA598E2D2AE96633003DD173 /* GeneralSettingsTab.swift */; };
-		CA7E0E1E2A4B5B0E000073EB /* NavigationBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E0E1D2A4B5B0E000073EB /* NavigationBarViewModel.swift */; };
 		CA7E0E212A4B608D000073EB /* AddNewWorkdaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E0E202A4B608D000073EB /* AddNewWorkdaySheet.swift */; };
+		CAA1CE0D2AEBB87F00E975B6 /* ReportGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA1CE0C2AEBB87F00E975B6 /* ReportGenerator.swift */; };
 		CABE83F12A58601D00B24DCC /* AddTaskPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE83F02A58601D00B24DCC /* AddTaskPopover.swift */; };
 		CABE83F32A58755600B24DCC /* TaskDetailMainInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */; };
 		CADB248C2AEA51B40068DD6D /* EditTaskSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADB248B2AEA51B40068DD6D /* EditTaskSheet.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CA088BD52A4A0D1600A59D7C /* MainTaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTaskListViewModel.swift; sourceTree = "<group>"; };
 		CA088BD82A4A11C600A59D7C /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		CA088BDA2A4A127600A59D7C /* TaskStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStatus.swift; sourceTree = "<group>"; };
 		CA2064BA2A484F44007BACF4 /* mtimelog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtimelog.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,8 +43,8 @@
 		CA2064D92A485D82007BACF4 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CA598E282AE965D2003DD173 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
 		CA598E2D2AE96633003DD173 /* GeneralSettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsTab.swift; sourceTree = "<group>"; };
-		CA7E0E1D2A4B5B0E000073EB /* NavigationBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarViewModel.swift; sourceTree = "<group>"; };
 		CA7E0E202A4B608D000073EB /* AddNewWorkdaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWorkdaySheet.swift; sourceTree = "<group>"; };
+		CAA1CE0C2AEBB87F00E975B6 /* ReportGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGenerator.swift; sourceTree = "<group>"; };
 		CABE83F02A58601D00B24DCC /* AddTaskPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskPopover.swift; sourceTree = "<group>"; };
 		CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailMainInfo.swift; sourceTree = "<group>"; };
 		CADB248B2AEA51B40068DD6D /* EditTaskSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskSheet.swift; sourceTree = "<group>"; };
@@ -68,8 +66,7 @@
 		CA088BD42A4A0CE800A59D7C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				CA088BD52A4A0D1600A59D7C /* MainTaskListViewModel.swift */,
-				CA7E0E1D2A4B5B0E000073EB /* NavigationBarViewModel.swift */,
+				CAA1CE0C2AEBB87F00E975B6 /* ReportGenerator.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -267,14 +264,13 @@
 				CA2064BE2A484F44007BACF4 /* mtimelogApp.swift in Sources */,
 				CA088BD92A4A11C600A59D7C /* TaskItem.swift in Sources */,
 				CA2064DA2A485D82007BACF4 /* Task.swift in Sources */,
-				CA088BD62A4A0D1600A59D7C /* MainTaskListViewModel.swift in Sources */,
+				CAA1CE0D2AEBB87F00E975B6 /* ReportGenerator.swift in Sources */,
 				CA598E2E2AE96633003DD173 /* GeneralSettingsTab.swift in Sources */,
 				CABE83F12A58601D00B24DCC /* AddTaskPopover.swift in Sources */,
 				CA2064CF2A485357007BACF4 /* NavigationBar.swift in Sources */,
 				CABE83F32A58755600B24DCC /* TaskDetailMainInfo.swift in Sources */,
 				CADB248C2AEA51B40068DD6D /* EditTaskSheet.swift in Sources */,
 				CADB248E2AEA54E90068DD6D /* DateOption.swift in Sources */,
-				CA7E0E1E2A4B5B0E000073EB /* NavigationBarViewModel.swift in Sources */,
 				CA088BDB2A4A127600A59D7C /* TaskStatus.swift in Sources */,
 				CAFD51AE2A4A080A004318EA /* Workday.swift in Sources */,
 			);
