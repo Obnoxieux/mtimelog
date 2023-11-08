@@ -25,6 +25,10 @@ struct MainTaskList: View {
     
     var body: some View {
         List {
+            if tasks.isEmpty {
+                Label("This working day does not have any tasks yet.", systemImage: "tray")
+                    .padding()
+            }
             ForEach(tasks, id: \.self) { task in
                 NavigationLink(destination: TaskDetail(task: task), label: {
                     TaskItem(task: task)

@@ -16,7 +16,7 @@ struct ContentView: View {
             ContentUnavailableView("No Working Day selected", systemImage: "calendar")
                 .navigationSplitViewColumnWidth(min: 210, ideal: 500, max: 600)
         } detail: {
-            ContentUnavailableView("No Task selected", systemImage: "note.text")
+            ContentUnavailableView("No Task selected", systemImage: "tray")
                 .navigationSplitViewColumnWidth(min: 200, ideal: 500, max: 600)
         }
     }
