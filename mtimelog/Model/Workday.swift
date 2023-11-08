@@ -45,6 +45,21 @@ final class Workday: Codable {
         let reportGenerator = ReportGenerator(workday: self, includeDuration: includeDuration)
         return reportGenerator.generateReport()
     }
+    
+    func generateExportText() -> String {
+        var taskTexts = ""
+        for task in tasks {
+            taskTexts.append(task.generateExportText())
+            taskTexts.append("\n")
+        }
+        
+        return """
+BEGIN WORKING DAY
+\(date.ISO8601Format())
+\(taskTexts)
+END WORKING DAY
+"""
+    }
 }
 
 extension Workday {

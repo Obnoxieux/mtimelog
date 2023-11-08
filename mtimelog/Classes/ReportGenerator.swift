@@ -36,7 +36,7 @@ Status for Working Day \(workday.date.formatted(date: .numeric, time: .omitted))
 
 - \(task.taskDescription ?? "")
 
-\(includeDuration ? getDurationData(task: task) : "")
+\(includeDuration ? task.getDurationDataForExport() : "")
 Status:
 \(task.status)
 
@@ -44,14 +44,5 @@ Comment:
 \(task.statusComment ?? "")
 _____________________________________________________
 """
-    }
-    
-    private func getDurationData(task: Task) -> String {
-        var durationData = """
-Time used:
-\(task.getDuration()) (\(task.startTime.formatted(date: .omitted, time: .shortened)) - \(task.endTime?.formatted(date: .omitted, time: .shortened) ?? "not yet finished"))
-"""
-        durationData.append("\n\n")
-        return durationData
     }
 }

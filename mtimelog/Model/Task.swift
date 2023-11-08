@@ -11,7 +11,7 @@ import SwiftData
 @Model
 final class Task: Codable {
     enum CodingKeys: CodingKey {
-        case projectID, taskDescription, statusComment, status, startTime, endTime, workday
+        case projectID, taskDescription, statusComment, status, startTime, endTime
     }
     
     @Attribute(.unique) var id = UUID()
@@ -82,6 +82,28 @@ final class Task: Codable {
         self.status = status
         self.startTime = startTime ?? self.startTime
         self.endTime = endTime
+    }
+    
+    func getDurationDataForExport() -> String {
+        var durationData = """
+Time used:
+\(getRawDurationData())
+"""
+        durationData.append("\n\n")
+        return durationData
+    }
+    
+    private func getRawDurationData() -> String {
+        return "\(getDuration()) (\(startTime.formatted(date: .omitted, time: .shortened)) - \(endTime?.formatted(date: .omitted, time: .shortened) ?? "not yet finished"))"
+    }
+    
+    func generateExportText() -> String {
+        return """
+BEGIN TASK
+\(getRawDurationData());
+\(projectID) \(taskDescription ?? "No description") \(status) \(statusComment ?? "")
+END TASK
+"""
     }
 }
 

@@ -22,4 +22,13 @@ class AppDataExporter {
             return "Encoding failed"
         }
     }
+    
+    func exportPlainText(workdays: [Workday]) -> String {
+        var exportFileText = ""
+        for workday in workdays {
+            exportFileText.append(workday.generateExportText())
+            exportFileText.append("\n")
+        }
+        return exportFileText
+    }
 }
