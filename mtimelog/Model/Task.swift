@@ -43,7 +43,12 @@ final class Task {
         let endTime = endTime ?? Date.now
         let usedTime = endTime.timeIntervalSince(startTime)
         let maxTime = Double(hoursInWorkingDay) * 3600
-        return usedTime / maxTime
+        
+        if usedTime > maxTime {
+            return 1.0
+        } else {
+            return usedTime / maxTime
+        }
     }
     
     func update(projectID: String, taskDescription: String? = nil, statusComment: String? = nil, status: TaskStatus, startTime: Date? = nil, endTime: Date? = nil) {
