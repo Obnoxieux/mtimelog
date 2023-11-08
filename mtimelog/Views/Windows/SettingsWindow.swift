@@ -14,6 +14,10 @@ struct SettingsWindow: View {
                 .tabItem {
                     Label("General", systemImage: "gearshape.2")
                 }
+            ExportSettingsTab()
+                .tabItem {
+                    Label("Export", systemImage: "arrow.down.square")
+                }
         }
         .frame(width: 450, height: 250)
     }

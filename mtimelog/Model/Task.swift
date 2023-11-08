@@ -42,7 +42,6 @@ final class Task: Codable {
         status = try container.decode(TaskStatus.self, forKey: .status)
         startTime = try container.decode(Date.self, forKey: .startTime)
         endTime = try container.decode(Date.self, forKey: .endTime)
-        workday = try container.decode(Workday.self, forKey: .workday)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -53,7 +52,6 @@ final class Task: Codable {
         try container.encode(statusComment, forKey: .statusComment)
         try container.encode(startTime, forKey: .startTime)
         try container.encode(endTime, forKey: .endTime)
-        try container.encode(workday, forKey: .workday)
     }
     
     func getDuration() -> String {

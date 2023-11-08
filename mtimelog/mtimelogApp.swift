@@ -14,9 +14,9 @@ struct mtimelogApp: App {
             ContentView()
         }
         .modelContainer(for: Workday.self)
-        
         Settings {
             SettingsWindow()
         }
+        .modelContainer(for: Workday.self)
     }
 }
