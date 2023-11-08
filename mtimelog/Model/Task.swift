@@ -9,7 +9,11 @@ import Foundation
 import SwiftData
 
 @Model
-final class Task {
+final class Task: Codable {
+    enum CodingKeys: CodingKey {
+        case projectID, taskDescription, statusComment, status, startTime, endTime, workday
+    }
+    
     @Attribute(.unique) var id = UUID()
     var projectID: String
     var taskDescription: String?
@@ -28,6 +32,28 @@ final class Task {
         self.startTime = startTime
         self.endTime = endTime
         self.workday = workday
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        projectID = try container.decode(String.self, forKey: .projectID)
+        taskDescription = try container.decode(String.self, forKey: .taskDescription)
+        statusComment = try container.decode(String.self, forKey: .statusComment)
+        status = try container.decode(TaskStatus.self, forKey: .status)
+        startTime = try container.decode(Date.self, forKey: .startTime)
+        endTime = try container.decode(Date.self, forKey: .endTime)
+        workday = try container.decode(Workday.self, forKey: .workday)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(projectID, forKey: .projectID)
+        try container.encode(taskDescription, forKey: .taskDescription)
+        try container.encode(status, forKey: .status)
+        try container.encode(statusComment, forKey: .statusComment)
+        try container.encode(startTime, forKey: .startTime)
+        try container.encode(endTime, forKey: .endTime)
+        try container.encode(workday, forKey: .workday)
     }
     
     func getDuration() -> String {
