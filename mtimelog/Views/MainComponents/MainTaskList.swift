@@ -59,6 +59,7 @@ struct MainTaskList: View {
                 }
             }
         }
+        .focusedSceneValue(\.addTask, $showAddPopover)
     }
 }
 

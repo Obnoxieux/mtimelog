@@ -27,7 +27,7 @@ struct NavigationBar: View {
                 Button(action: {
                     showPopover = true
                 }, label: {
-                    Label("New workday", systemImage: "plus")
+                    Label("New working day", systemImage: "plus")
                 })
                 .buttonStyle(.plain)
                 .popover(isPresented: $showPopover) {
@@ -37,6 +37,7 @@ struct NavigationBar: View {
         }
         .listStyle(.sidebar)
         .navigationTitle("Workdays")
+        .focusedSceneValue(\.addWorkday, $showPopover)
     }
 }
 

@@ -14,6 +14,14 @@ struct mtimelogApp: App {
             ContentView()
         }
         .modelContainer(for: Workday.self)
+        .commands {
+            CommandGroup(after: CommandGroupPlacement.newItem) {
+                AddWorkdayMenuBarButton()
+                    .keyboardShortcut("n", modifiers: [.command, .shift])
+                AddTaskMenuBarButton()
+                    .keyboardShortcut("t")
+            }
+        }
         Settings {
             SettingsWindow()
         }
