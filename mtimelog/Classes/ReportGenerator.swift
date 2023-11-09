@@ -17,7 +17,7 @@ class ReportGenerator {
     }
     
     func generateReport() -> String {
-        var fullReport: String = ""
+        var fullReport = "Status for Working Day \(workday.date.formatted(date: .numeric, time: .omitted))'\n\n"
         
         for task in workday.tasks where task.status != .ongoing {
             let taskReport = reportSingleTask(task: task)
@@ -30,8 +30,6 @@ class ReportGenerator {
     
     private func reportSingleTask(task: Task) -> String {
         return """
-Status for Working Day \(workday.date.formatted(date: .numeric, time: .omitted))
-
 \(task.projectID):
 
 - \(task.taskDescription ?? "")
@@ -39,10 +37,20 @@ Status for Working Day \(workday.date.formatted(date: .numeric, time: .omitted))
 \(includeDuration ? task.getDurationDataForExport() : "")
 Status:
 \(task.status)
-
-Comment:
-\(task.statusComment ?? "")
+\(includeStatusComment(task: task))
 _____________________________________________________
 """
+    }
+    
+    private func includeStatusComment(task: Task) -> String {
+        if let statusComment = task.statusComment {
+            if !statusComment.isEmpty {
+                return """
+Comment:
+\(task.statusComment ?? "")
+"""
+            }
+        }
+        return ""
     }
 }
