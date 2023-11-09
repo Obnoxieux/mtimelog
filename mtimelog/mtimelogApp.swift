@@ -13,7 +13,7 @@ struct mtimelogApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Workday.self)
+        .modelContainer(for: [Workday.self, Task.self])
         .commands {
             CommandGroup(after: CommandGroupPlacement.newItem) {
                 AddWorkdayMenuBarButton()
@@ -25,6 +25,6 @@ struct mtimelogApp: App {
         Settings {
             SettingsWindow()
         }
-        .modelContainer(for: Workday.self)
+        .modelContainer(for: [Workday.self, Task.self])
     }
 }
