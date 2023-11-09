@@ -67,6 +67,7 @@ struct MainTaskList: View {
                 }
                 .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
                     AddTaskPopover(workday: workday)
+                        .frame(minHeight: 300)
                 }
             }
         }
