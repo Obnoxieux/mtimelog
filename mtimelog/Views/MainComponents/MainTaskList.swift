@@ -11,8 +11,18 @@ import SwiftData
 struct MainTaskList: View {
     @AppStorage("showTimesInReport") var showTimesInReport = true
     @State var showAddPopover = false
+    @State var searchText = ""
     @Query var tasks: [Task]
     @Bindable var workday: Workday
+    
+    var filteredTasks: [Task] {
+        guard searchText.isEmpty == false else { return tasks }
+        return tasks.filter {
+            $0.projectID.localizedStandardContains(searchText) ||
+            ($0.taskDescription ?? "").localizedStandardContains(searchText) ||
+            ($0.statusComment ?? "").localizedStandardContains(searchText)
+        }
+    }
     
     init(workday: Workday) {
         self.workday = workday
@@ -29,21 +39,22 @@ struct MainTaskList: View {
                 Label("This working day does not have any tasks yet.", systemImage: "tray")
                     .padding()
             }
-            ForEach(tasks, id: \.self) { task in
+            ForEach(filteredTasks, id: \.self) { task in
                 NavigationLink(destination: TaskDetail(task: task), label: {
                     TaskItem(task: task)
                         .listRowSeparatorTint(task.status.color)
                 })
+                .id(UUID())
             }
             .listRowSeparator(.visible)
         }
-        .onDeleteCommand(perform: {
-            //
-        })
         .listStyle(.plain)
         .navigationTitle("Tasks for \(workday.date.formatted(date: .long, time: .omitted))")
+        .searchable(text: $searchText)
+        .animation(.easeIn, value: tasks)
+        
         .toolbar {
-            ToolbarItemGroup(placement: .secondaryAction) {
+            ToolbarItemGroup() {
                 Button {
                     showAddPopover = true
                 } label: {
