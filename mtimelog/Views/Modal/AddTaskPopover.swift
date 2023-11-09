@@ -20,14 +20,7 @@ struct AddTaskPopover: View {
     @State private var projectIDSuggestions = [String]()
     @State private var descriptionSuggestions = [String]()
     
-    static let MAX_SUGGESTIONS = 45
-    
-    static var descriptor: FetchDescriptor<Task> {
-        var descriptor = FetchDescriptor<Task>(sortBy: [SortDescriptor(\.startTime, order: .reverse)])
-        descriptor.fetchLimit = self.MAX_SUGGESTIONS
-        descriptor.propertiesToFetch = [\.projectID, \.taskDescription]
-        return descriptor
-    }
+    let suggestionProvider = SuggestionProvider()
     
     private var formValid: Bool {
         if projectID != "" {
@@ -39,7 +32,7 @@ struct AddTaskPopover: View {
     
     var body: some View {
         Form {
-            LabeledContent("Project Name")  {
+            LabeledContent("Project ID")  {
                 ComboBox(items: projectIDSuggestions, text: $projectID)
             }
             LabeledContent("Description")  {
@@ -74,7 +67,13 @@ struct AddTaskPopover: View {
         .formStyle(.grouped)
         
         .task {
-            await loadSuggestions()
+            do {
+                let tasks = try modelContext.fetch(SuggestionProvider.descriptor)
+                projectIDSuggestions = await suggestionProvider.loadSuggestions(fields: .id, tasks: tasks)
+                descriptionSuggestions = await suggestionProvider.loadSuggestions(fields: .desc, tasks: tasks)
+            } catch {
+                print("couldn't load tasks via FetchDescriptor")
+            }
         }
     }
         
@@ -87,27 +86,6 @@ struct AddTaskPopover: View {
             workday: workday
         )
         workday.addTask(task: task)
-    }
-    
-    func loadSuggestions() async {
-        do {
-            let tasks = try modelContext.fetch(AddTaskPopover.descriptor)
-            var idSuggestionSet = Set<String>()
-            var descSuggestionSet = Set<String>()
-            
-            for task in tasks {
-                idSuggestionSet.insert(task.projectID)
-                if let desc = task.taskDescription {
-                    descSuggestionSet.insert(desc)
-                }
-            }
-            idSuggestionSet.remove("")
-            descSuggestionSet.remove("")
-            projectIDSuggestions = Array(idSuggestionSet)
-            descriptionSuggestions = Array(descSuggestionSet)
-        } catch {
-            print("couldn't load tasks via FetchDescriptor")
-        }
     }
 }
 

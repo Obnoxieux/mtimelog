@@ -21,6 +21,7 @@
 		CA51F2462AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */; };
 		CA51F2482AFCD16F00863E02 /* AddTaskMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */; };
 		CA51F24A2AFD0F1800863E02 /* ComboBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2492AFD0F1800863E02 /* ComboBox.swift */; };
+		CA51F24C2AFD2C3600863E02 /* SuggestionProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F24B2AFD2C3600863E02 /* SuggestionProvider.swift */; };
 		CA598E292AE965D2003DD173 /* SettingsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA598E282AE965D2003DD173 /* SettingsWindow.swift */; };
 		CA598E2E2AE96633003DD173 /* GeneralSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA598E2D2AE96633003DD173 /* GeneralSettingsTab.swift */; };
 		CA75B66D2AFB7E380014EE24 /* ExportSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA75B66C2AFB7E380014EE24 /* ExportSettingsTab.swift */; };
@@ -52,6 +53,7 @@
 		CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkdayMenuBarButton.swift; sourceTree = "<group>"; };
 		CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskMenuBarButton.swift; sourceTree = "<group>"; };
 		CA51F2492AFD0F1800863E02 /* ComboBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComboBox.swift; sourceTree = "<group>"; };
+		CA51F24B2AFD2C3600863E02 /* SuggestionProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionProvider.swift; sourceTree = "<group>"; };
 		CA598E282AE965D2003DD173 /* SettingsWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsWindow.swift; sourceTree = "<group>"; };
 		CA598E2D2AE96633003DD173 /* GeneralSettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsTab.swift; sourceTree = "<group>"; };
 		CA75B66C2AFB7E380014EE24 /* ExportSettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSettingsTab.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				CAA1CE0C2AEBB87F00E975B6 /* ReportGenerator.swift */,
 				CA75B66E2AFB81930014EE24 /* AppDataExporter.swift */,
 				CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */,
+				CA51F24B2AFD2C3600863E02 /* SuggestionProvider.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				CA51F2432AFCCD7B00863E02 /* FocusedValues.swift in Sources */,
 				CA598E2E2AE96633003DD173 /* GeneralSettingsTab.swift in Sources */,
 				CABE83F12A58601D00B24DCC /* AddTaskPopover.swift in Sources */,
+				CA51F24C2AFD2C3600863E02 /* SuggestionProvider.swift in Sources */,
 				CA51F2462AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift in Sources */,
 				CA2064CF2A485357007BACF4 /* NavigationBar.swift in Sources */,
 				CABE83F32A58755600B24DCC /* TaskDetailMainInfo.swift in Sources */,

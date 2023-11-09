@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EditTaskSheet: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) private var modelContext
     @Bindable var task: Task
     
     var mode: EditMode
@@ -20,6 +21,9 @@ struct EditTaskSheet: View {
     @State private var startTime = Date.now
     @State private var endTime = Date.now
     @State private var status = TaskStatus.completed
+    @State private var projectIDSuggestions = [String]()
+    
+    let suggestionProvider = SuggestionProvider()
     
     private var formValid: Bool {
         if projectID != "" && description != "" && task.startTime < endTime {
@@ -46,8 +50,9 @@ struct EditTaskSheet: View {
                         Text(workday.date, format: .dateTime.day().month().year())
                     }
                 }
-                TextField("Project ID*", text: $projectID) // TODO: combo Box
-                    .textFieldStyle(.roundedBorder)
+                LabeledContent("Project ID*")  {
+                    ComboBox(items: projectIDSuggestions, text: $projectID)
+                }
                 LabeledContent("Description*") {
                         TextEditor(text: $description)
                             .alignmentGuide(.firstTextBaseline) { $0[.firstTextBaseline] + 9 }
@@ -139,6 +144,15 @@ struct EditTaskSheet: View {
                 endTime = Date.now
             }
         })
+        
+        .task {
+            do {
+                let tasks = try modelContext.fetch(SuggestionProvider.descriptor)
+                projectIDSuggestions = await suggestionProvider.loadSuggestions(fields: .id, tasks: tasks)
+            } catch {
+                print("couldn't load tasks via FetchDescriptor")
+            }
+        }
     }
     
     func initialiseView() {
