@@ -9,7 +9,10 @@ import SwiftUI
 import SwiftData
 
 struct NavigationBar: View {
+    @Environment(\.modelContext) private var modelContext
     @Query var workdays: [Workday]
+    @State private var workdayToDelete: Workday? = nil
+    @State var showingDeleteConfirmationDialog = false
     @State var showPopover = false
     
     var body: some View {
@@ -21,6 +24,12 @@ struct NavigationBar: View {
                     NavigationLink(destination: MainTaskList(workday: workday), label: {
                         Text(workday.date, format: .dateTime.day().month().year())
                     })
+                    .contextMenu {
+                        Button("Delete Working Day") {
+                            workdayToDelete = workday
+                            showingDeleteConfirmationDialog = true
+                        }
+                    }
                 }
             }
             Section {
@@ -38,6 +47,23 @@ struct NavigationBar: View {
         .listStyle(.sidebar)
         .navigationTitle("Workdays")
         .focusedSceneValue(\.addWorkday, $showPopover)
+        
+        .confirmationDialog("Confirm Deletion", isPresented: $showingDeleteConfirmationDialog) {
+            Button("Delete Working Day", role: .destructive) {
+                if let workday = workdayToDelete {
+                    modelContext.delete(workday)
+                    do {
+                        try modelContext.save()
+                    } catch {
+                        print("couldn't immediately save deletion")
+                    }
+                    workdayToDelete = nil
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("The working day and all tasks associated with it will irrevocably deleted!")
+        }
     }
 }
 

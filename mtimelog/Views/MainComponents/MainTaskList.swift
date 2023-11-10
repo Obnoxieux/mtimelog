@@ -104,14 +104,24 @@ struct MainTaskList: View {
         .focusedSceneValue(\.addTask, $showAddPopover)
     }
     
-    func deleteTask(_ task :Task) {
+    func deleteTask(_ task: Task) {
         modelContext.delete(task)
+        do {
+            try modelContext.save()
+        } catch {
+            print("couldn't immediately save deletion")
+        }
     }
     
     func deleteTaskFromIndexSet(_ indexSet: IndexSet) {
         for index in indexSet {
             let task = tasks[index]
             modelContext.delete(task)
+            do {
+                try modelContext.save()
+            } catch {
+                print("couldn't immediately save deletion")
+            }
         }
     }
 }
