@@ -17,6 +17,7 @@ struct GeneralSettingsTab: View {
                 .textFieldStyle(.roundedBorder)
             Toggle("Include task times and duration in report", isOn: $showTimesInReport)
         }
+        .textSelection(.enabled)
         .formStyle(.grouped)
     }
 }

@@ -64,6 +64,7 @@ struct AddTaskPopover: View {
                 .buttonStyle(.borderedProminent)
             }
         }
+        .textSelection(.enabled)
         .formStyle(.grouped)
         
         .task {

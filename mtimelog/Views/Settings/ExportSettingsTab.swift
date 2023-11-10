@@ -33,6 +33,7 @@ struct ExportSettingsTab: View {
                 }
             }
         }
+        .textSelection(.enabled)
         .formStyle(.grouped)
         
         .fileExporter(isPresented: $showFileExporter, document: exportedFile, contentType: fileType, defaultFilename: "mtimelog_data_export", onCompletion: { result in

@@ -105,6 +105,10 @@ BEGIN TASK
 END TASK
 """
     }
+    
+    func copyTaskTextToClipboard(includeProjectID: Bool) -> String {
+        return "\(includeProjectID ? projectID + ": " : "")\(taskDescription ?? "")"
+    }
 }
 
 extension Task {

@@ -131,6 +131,7 @@ struct EditTaskSheet: View {
             }
             .padding()
         }
+        .textSelection(.enabled)
         .frame(minWidth: 540, maxWidth: 800)
         .navigationTitle("Finish Task in \(task.projectID)")
         .formStyle(.grouped)

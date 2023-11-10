@@ -14,12 +14,20 @@ struct TaskDetailMainInfo: View {
         Label(task.projectID, systemImage: "tray.full")
             .bold()
             .labelStyle(.titleOnly)
-        Label(task.taskDescription ?? "No description provided", systemImage: "list.bullet.clipboard")
+            .textSelection(.enabled)
+        HStack {
+            Label(task.taskDescription ?? "No description provided", systemImage: "list.bullet.clipboard")
+                .textSelection(.enabled)
+            Spacer()
+            Button("Copy") {
+                let pasteboard = NSPasteboard.general
+                pasteboard.declareTypes([.string], owner: nil)
+                pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: false), forType: .string)
+            }
+        }
     }
 }
 
-struct TaskDetailMainInfo_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskDetailMainInfo(task: Task.sampleData[0])
-    }
+#Preview {
+    TaskDetailMainInfo(task: Task.sampleData[0])
 }

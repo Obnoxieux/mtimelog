@@ -82,7 +82,14 @@ struct TaskDetail: View {
                         .foregroundColor(task.status.color)
                         .padding(.vertical, listPadding)
                 }
+                Button("Copy Task Info") {
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.declareTypes([.string], owner: nil)
+                    pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
+                }
+                .padding(.vertical)
             }
+            .textSelection(.enabled)
             .sheet(isPresented: $showFinishSheet) {
                 EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.finish)
             }
