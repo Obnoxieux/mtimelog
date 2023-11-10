@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class Task: Codable {
+final class Task: Codable, Identifiable {
     enum CodingKeys: CodingKey {
         case projectID, taskDescription, statusComment, status, startTime, endTime
     }

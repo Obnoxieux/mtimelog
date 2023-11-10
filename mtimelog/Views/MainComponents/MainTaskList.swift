@@ -10,10 +10,14 @@ import SwiftData
 
 struct MainTaskList: View {
     @AppStorage("showTimesInReport") var showTimesInReport = true
+    @Environment(\.modelContext) private var modelContext
     @State var showAddPopover = false
     @State var searchText = ""
+    @State var selectedTask: Task? = nil
     @Query var tasks: [Task]
     @Bindable var workday: Workday
+    
+    let pasteboard = NSPasteboard.general
     
     var filteredTasks: [Task] {
         guard searchText.isEmpty == false else { return tasks }
@@ -26,6 +30,7 @@ struct MainTaskList: View {
     
     init(workday: Workday) {
         self.workday = workday
+        pasteboard.declareTypes([.string], owner: nil)
         let id = workday.id
         let predicate = #Predicate<Task> { task in
             task.workday?.id == id
@@ -39,19 +44,44 @@ struct MainTaskList: View {
                 Label("This working day does not have any tasks yet.", systemImage: "tray")
                     .padding()
             }
-            ForEach(filteredTasks, id: \.self) { task in
+            ForEach(filteredTasks, id: \.id) { (task) in
                 NavigationLink(destination: TaskDetail(task: task), label: {
                     TaskItem(task: task)
                         .listRowSeparatorTint(task.status.color)
                 })
                 .id(UUID())
+                .contextMenu {
+                    Button("Copy Project ID") {
+                        pasteboard.setString(task.projectID, forType: .string)
+                    }
+                    Button("Copy Description") {
+                        pasteboard.setString(task.taskDescription ?? "", forType: .string)
+                    }
+                    Button("Copy ID + Description") {
+                        pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
+                    }
+                    Divider()
+                    Button("Edit Task") {
+                        self.selectedTask = task
+                    }
+                    Divider()
+                    Button("Delete Task") {
+                        deleteTask(task)
+                    }
+                }
             }
+            // this does work, but uses a trackpad swipe action which is not really intuitive on macOS and may not be available on all Macs
+            .onDelete(perform: deleteTaskFromIndexSet)
             .listRowSeparator(.visible)
         }
         .listStyle(.plain)
         .navigationTitle("Tasks for \(workday.date.formatted(date: .long, time: .omitted))")
         .searchable(text: $searchText)
         .animation(.easeIn, value: tasks)
+        
+        .sheet(item: self.$selectedTask) { selectedTask in
+            EditTaskSheet(task: selectedTask, mode: EditTaskSheet.EditMode.edit)
+        }
         
         .toolbar {
             ToolbarItemGroup() {
@@ -72,6 +102,17 @@ struct MainTaskList: View {
             }
         }
         .focusedSceneValue(\.addTask, $showAddPopover)
+    }
+    
+    func deleteTask(_ task :Task) {
+        modelContext.delete(task)
+    }
+    
+    func deleteTaskFromIndexSet(_ indexSet: IndexSet) {
+        for index in indexSet {
+            let task = tasks[index]
+            modelContext.delete(task)
+        }
     }
 }
 
