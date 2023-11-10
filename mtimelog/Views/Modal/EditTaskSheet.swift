@@ -62,7 +62,7 @@ struct EditTaskSheet: View {
             .padding(.vertical, 3)
             Section(header: Text("Time")) {
                 if mode == .edit {
-                        DatePicker("Start Time*", selection: $startTime, displayedComponents: .hourAndMinute)
+                    DatePicker("Start Time*", selection: $startTime)
                         .datePickerStyle(.compact)
                 } else {
                     LabeledContent("Start Time") {
@@ -80,9 +80,11 @@ struct EditTaskSheet: View {
                 }
                 
                 if selectedDateOption == .select || mode == .edit {
-                        DatePicker("End Time*", selection: $endTime, displayedComponents: .hourAndMinute)
+                        DatePicker("End Time*", selection: $endTime)
                         .datePickerStyle(.compact)
                 }
+                Text("Note: changing the date component it only intended for correcting mistakes, the task is not automatically transferred to the corresponding working day.")
+                    .foregroundStyle(.secondary)
             }
             .padding(.vertical, 3)
             Section(header: Text("Status Details")) {
@@ -125,7 +127,7 @@ struct EditTaskSheet: View {
             .padding()
         }
         .textSelection(.enabled)
-        .frame(minWidth: 540, maxWidth: 800)
+        .frame(minWidth: 540, maxWidth: 700)
         .navigationTitle("Finish Task in \(task.projectID)")
         .formStyle(.grouped)
         
