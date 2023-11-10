@@ -26,7 +26,7 @@ struct ComboBox: NSViewRepresentable
     {
         let comboBox = NSComboBox()
         comboBox.usesDataSource = false
-        comboBox.completes = false
+        comboBox.completes = true
         comboBox.delegate = context.coordinator
         comboBox.intercellSpacing = NSSize(width: 0.0, height: 10.0) // Matches the look and feel of Big Sur onwards.
         return comboBox
