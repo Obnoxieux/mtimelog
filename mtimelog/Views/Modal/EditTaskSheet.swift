@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct EditTaskSheet: View {
     @Environment(\.dismiss) var dismiss
@@ -83,8 +84,9 @@ struct EditTaskSheet: View {
                         DatePicker("End Time*", selection: $endTime)
                         .datePickerStyle(.compact)
                 }
-                Text("Note: changing the date component it only intended for correcting mistakes, the task is not automatically transferred to the corresponding working day.")
+                Text("Note: changing the date component is only intended for correcting mistakes, the task is not automatically transferred to the corresponding working day.")
                     .foregroundStyle(.secondary)
+                    .font(.callout)
             }
             .padding(.vertical, 3)
             Section(header: Text("Status Details")) {
@@ -180,11 +182,16 @@ struct EditTaskSheet: View {
 }
 
 #Preview {
-    EditTaskSheet(task: Task.sampleData[2], mode: EditTaskSheet.EditMode.edit)
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Task.self, configurations: config)
+    
+    let task = Task.sampleData[2]
+    return EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.edit)
         .frame(height: 700)
+        .modelContainer(container)
 }
 
-#Preview {
-    EditTaskSheet(task: Task.sampleData[2], mode: EditTaskSheet.EditMode.finish)
-        .frame(height: 700)
-}
+//#Preview {
+//    EditTaskSheet(task: Task.sampleData[2], mode: EditTaskSheet.EditMode.finish)
+//        .frame(height: 700)
+//}
