@@ -115,14 +115,7 @@ struct EditTaskSheet: View {
                     dismiss()
                 }
                 Button("Save Task") {
-                    task.update(
-                        projectID: projectID,
-                        taskDescription: description,
-                        statusComment: statusComment,
-                        status: status,
-                        startTime: startTime,
-                        endTime: endTime
-                    )
+                    saveTask()
                     dismiss()
                 }
                 .disabled(!formValid)
@@ -153,6 +146,22 @@ struct EditTaskSheet: View {
             } catch {
                 print("couldn't load tasks via FetchDescriptor")
             }
+        }
+    }
+    
+    func saveTask() {
+        task.update(
+            projectID: projectID,
+            taskDescription: description,
+            statusComment: statusComment,
+            status: status,
+            startTime: startTime,
+            endTime: endTime
+        )
+        do {
+            try modelContext.save()
+        } catch {
+            print("couldn't immediately save deletion due to \(error.localizedDescription)")
         }
     }
     

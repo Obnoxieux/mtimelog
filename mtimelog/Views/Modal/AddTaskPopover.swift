@@ -87,6 +87,11 @@ struct AddTaskPopover: View {
             workday: workday
         )
         workday.addTask(task: task)
+        do {
+            try modelContext.save()
+        } catch {
+            print("couldn't immediately save deletion due to \(error.localizedDescription)")
+        }
     }
 }
 
