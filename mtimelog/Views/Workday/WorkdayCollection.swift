@@ -41,6 +41,7 @@ struct WorkdayCollection: View {
                     showingDeleteConfirmationDialog = true
                 }
             }
+            .badge(workday.tasks.count)
         }
         Divider()
         Button(action: {
