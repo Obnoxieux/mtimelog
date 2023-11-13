@@ -6,14 +6,31 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct mtimelogApp: App {
+    var container: ModelContainer
+    
+    let fullSchema = Schema([
+        Workday.self,
+        Task.self,
+        TextSuggestion.self
+    ])
+    
+    init() {
+        do {
+            container = try ModelContainer(for: fullSchema)
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Workday.self, Task.self])
+        .modelContainer(container)
         .commands {
             CommandGroup(after: CommandGroupPlacement.newItem) {
                 AddWorkdayMenuBarButton()
@@ -22,9 +39,10 @@ struct mtimelogApp: App {
                     .keyboardShortcut("t")
             }
         }
+        
         Settings {
             SettingsWindow()
         }
-        .modelContainer(for: [Workday.self, Task.self])
+        .modelContainer(container)
     }
 }

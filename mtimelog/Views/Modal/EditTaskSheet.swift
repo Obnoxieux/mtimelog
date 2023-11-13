@@ -145,8 +145,9 @@ struct EditTaskSheet: View {
         
         .task {
             do {
-                let tasks = try modelContext.fetch(SuggestionProvider.descriptor)
-                projectIDSuggestions = await suggestionProvider.loadSuggestions(fields: .id, tasks: tasks)
+                let tasks = try modelContext.fetch(SuggestionProvider.taskDescriptor)
+                let suggestions = try modelContext.fetch(SuggestionProvider.suggestionDescriptor)
+                projectIDSuggestions = await suggestionProvider.loadSuggestions(fields: .id, tasks: tasks, suggestions: suggestions)
             } catch {
                 print("couldn't load tasks via FetchDescriptor")
             }

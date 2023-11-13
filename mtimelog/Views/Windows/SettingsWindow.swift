@@ -18,6 +18,10 @@ struct SettingsWindow: View {
                 .tabItem {
                     Label("Export", systemImage: "arrow.down.square")
                 }
+            TextSuggestionsTab()
+                .tabItem {
+                    Label("Suggestions", systemImage: "tray.full")
+                }
         }
         .frame(width: 450, height: 250)
     }

@@ -9,21 +9,27 @@ import Foundation
 import SwiftData
 
 class SuggestionProvider {
-    enum SuggestionFields {
-        case id, desc
-    }
     static let MAX_SUGGESTIONS = 45
     
-    static var descriptor: FetchDescriptor<Task> {
+    static var taskDescriptor: FetchDescriptor<Task> {
         var descriptor = FetchDescriptor<Task>(sortBy: [SortDescriptor(\.startTime, order: .reverse)])
         descriptor.fetchLimit = MAX_SUGGESTIONS
         descriptor.propertiesToFetch = [\.projectID, \.taskDescription]
         return descriptor
     }
     
+    static var suggestionDescriptor: FetchDescriptor<TextSuggestion> {
+        let descriptor = FetchDescriptor<TextSuggestion>(sortBy: [SortDescriptor(\.suggestionText)])
+        return descriptor
+    }
+    
     // I would very much prefer to pass the whole modelContext here but it may introduce data races
-    func loadSuggestions(fields: SuggestionFields, tasks: [Task]) async -> [String] {
+    func loadSuggestions(fields: SuggestionFields, tasks: [Task], suggestions: [TextSuggestion]) async -> [String] {
         var suggestionSet = Set<String>()
+        
+        for suggestion in suggestions where suggestion.suggestionFields == fields {
+            suggestionSet.insert(suggestion.suggestionText)
+        }
         
         for task in tasks {
             if fields == .id {
