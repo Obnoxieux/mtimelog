@@ -31,6 +31,13 @@ struct NavigationBar: View {
                 Divider()
                 WorkdayCollection(startDate: startDate, endDate: endDate)
             }
+            Spacer()
+            Section(header: Text("Stats")) {
+                NavigationLink(destination: WeeklyWorkdayChartList(startDate: startDate, endDate: endDate), label: {
+                    Text("Individual Days")
+                })
+                Text("Aggregated")
+            }
         }
         .listStyle(.sidebar)
         .navigationTitle("Workdays")

@@ -33,6 +33,7 @@
 		CA79A1A92AFE819A0020BD6D /* WorkdayCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA79A1A82AFE819A0020BD6D /* WorkdayCollection.swift */; };
 		CA7E0E212A4B608D000073EB /* AddNewWorkdaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA7E0E202A4B608D000073EB /* AddNewWorkdaySheet.swift */; };
 		CA8CAB122B06664D00BD24FD /* WorkdayChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CAB112B06664D00BD24FD /* WorkdayChart.swift */; };
+		CA8CAB142B0679AC00BD24FD /* WeeklyWorkdayChartList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8CAB132B0679AC00BD24FD /* WeeklyWorkdayChartList.swift */; };
 		CAA1CE0D2AEBB87F00E975B6 /* ReportGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA1CE0C2AEBB87F00E975B6 /* ReportGenerator.swift */; };
 		CABE83F12A58601D00B24DCC /* AddTaskPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE83F02A58601D00B24DCC /* AddTaskPopover.swift */; };
 		CABE83F32A58755600B24DCC /* TaskDetailMainInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */; };
@@ -70,6 +71,7 @@
 		CA79A1A82AFE819A0020BD6D /* WorkdayCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayCollection.swift; sourceTree = "<group>"; };
 		CA7E0E202A4B608D000073EB /* AddNewWorkdaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWorkdaySheet.swift; sourceTree = "<group>"; };
 		CA8CAB112B06664D00BD24FD /* WorkdayChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkdayChart.swift; sourceTree = "<group>"; };
+		CA8CAB132B0679AC00BD24FD /* WeeklyWorkdayChartList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyWorkdayChartList.swift; sourceTree = "<group>"; };
 		CAA1CE0C2AEBB87F00E975B6 /* ReportGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportGenerator.swift; sourceTree = "<group>"; };
 		CABE83F02A58601D00B24DCC /* AddTaskPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskPopover.swift; sourceTree = "<group>"; };
 		CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailMainInfo.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				CA7E0E202A4B608D000073EB /* AddNewWorkdaySheet.swift */,
 				CA79A1A82AFE819A0020BD6D /* WorkdayCollection.swift */,
 				CA8CAB112B06664D00BD24FD /* WorkdayChart.swift */,
+				CA8CAB132B0679AC00BD24FD /* WeeklyWorkdayChartList.swift */,
 			);
 			path = Workday;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				CA2064BE2A484F44007BACF4 /* mtimelogApp.swift in Sources */,
 				CA088BD92A4A11C600A59D7C /* TaskItem.swift in Sources */,
 				CA75B6712AFBBC8A0014EE24 /* ExportFile.swift in Sources */,
+				CA8CAB142B0679AC00BD24FD /* WeeklyWorkdayChartList.swift in Sources */,
 				CA2064DA2A485D82007BACF4 /* Task.swift in Sources */,
 				CAA1CE0D2AEBB87F00E975B6 /* ReportGenerator.swift in Sources */,
 				CA51F2432AFCCD7B00863E02 /* FocusedValues.swift in Sources */,

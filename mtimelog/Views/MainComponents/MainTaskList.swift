@@ -78,6 +78,7 @@ struct MainTaskList: View {
             Section(header: Text("Stats")) {
                 if workday.tasks.isEmpty {
                     Text("Once this working day has some tasks, you will see a chart here.")
+                        .padding()
                 } else {
                     WorkdayChart(workday: workday)
                         .padding()
