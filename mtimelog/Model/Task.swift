@@ -63,6 +63,10 @@ final class Task: Codable, Identifiable {
         return formatter.string(from: duration)!
     }
     
+    func getDurationAsInterval() -> TimeInterval {
+        return (endTime ?? Date.now).timeIntervalSince(startTime)
+    }
+    
     func calculatePercentageOfWorkingDay(hoursInWorkingDay: Int) -> Double {
         let endTime = endTime ?? Date.now
         let usedTime = endTime.timeIntervalSince(startTime)

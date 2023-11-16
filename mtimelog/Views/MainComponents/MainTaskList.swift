@@ -40,39 +40,49 @@ struct MainTaskList: View {
     
     var body: some View {
         List {
-            if tasks.isEmpty {
-                Label("This working day does not have any tasks yet.", systemImage: "tray")
-                    .padding()
-            }
-            ForEach(filteredTasks, id: \.id) { (task) in
-                NavigationLink(destination: TaskDetail(task: task), label: {
-                    TaskItem(task: task)
-                        .listRowSeparatorTint(task.status.color)
-                })
-                .id(UUID())
-                .contextMenu {
-                    Button("Copy Project ID") {
-                        pasteboard.setString(task.projectID, forType: .string)
-                    }
-                    Button("Copy Description") {
-                        pasteboard.setString(task.taskDescription ?? "", forType: .string)
-                    }
-                    Button("Copy ID + Description") {
-                        pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
-                    }
-                    Divider()
-                    Button("Edit Task") {
-                        self.selectedTask = task
-                    }
-                    Divider()
-                    Button("Delete Task") {
-                        deleteTask(task)
+            Section(header: Text("Tasks")) {
+                if tasks.isEmpty {
+                    Label("This working day does not have any tasks yet.", systemImage: "tray")
+                        .padding()
+                }
+                ForEach(filteredTasks, id: \.id) { (task) in
+                    NavigationLink(destination: TaskDetail(task: task), label: {
+                        TaskItem(task: task)
+                            .listRowSeparatorTint(task.status.color)
+                    })
+                    .id(UUID())
+                    .contextMenu {
+                        Button("Copy Project ID") {
+                            pasteboard.setString(task.projectID, forType: .string)
+                        }
+                        Button("Copy Description") {
+                            pasteboard.setString(task.taskDescription ?? "", forType: .string)
+                        }
+                        Button("Copy ID + Description") {
+                            pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
+                        }
+                        Divider()
+                        Button("Edit Task") {
+                            self.selectedTask = task
+                        }
+                        Divider()
+                        Button("Delete Task") {
+                            deleteTask(task)
+                        }
                     }
                 }
+                // this does work, but uses a trackpad swipe action which is not really intuitive on macOS and may not be available on all Macs
+                .onDelete(perform: deleteTaskFromIndexSet)
+                .listRowSeparator(.visible)
             }
-            // this does work, but uses a trackpad swipe action which is not really intuitive on macOS and may not be available on all Macs
-            .onDelete(perform: deleteTaskFromIndexSet)
-            .listRowSeparator(.visible)
+            Section(header: Text("Stats")) {
+                if workday.tasks.isEmpty {
+                    Text("Once this working day has some tasks, you will see a chart here.")
+                } else {
+                    WorkdayChart(workday: workday)
+                        .padding()
+                }
+            }
         }
         .listStyle(.plain)
         .navigationTitle("Tasks for \(workday.date.formatted(date: .long, time: .omitted))")
