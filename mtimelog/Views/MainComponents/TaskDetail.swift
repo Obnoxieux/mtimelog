@@ -23,30 +23,11 @@ struct TaskDetail: View {
     var body: some View {
         if taskDeleted == false {
             List {
-                let gaugePercentage = task.calculatePercentageOfWorkingDay(hoursInWorkingDay: hoursInWorkingDay)
+                TaskDetailMainInfo(task: task)
+                TaskDetailTimeSection(task: task)
+                TaskDetailStatusSection(task: task)
                 switch task.status {
-                    
                 case .ongoing:
-                    TaskDetailMainInfo(task: task)
-                        .padding(.vertical, listPadding)
-                    VStack(spacing: 10) {
-                        HStack {
-                            Text("Started: ") + Text(task.startTime, style: .time).font(.headline)
-                            Spacer()
-                            Text(task.startTime, style: .timer)
-                                .font(.headline)
-                        }
-                        .padding(.vertical, listPadding)
-                        
-                        
-                        Gauge(value: gaugePercentage) {
-                            Text("% of Workday")
-                        }
-                        .padding(.vertical, listPadding)
-                    }
-                    Label(task.status.rawValue, systemImage: "info.square")
-                        .foregroundColor(task.status.color)
-                        .padding(.vertical, listPadding)
                     HStack {
                         Spacer()
                         Button("Finish Task") {
@@ -56,38 +37,14 @@ struct TaskDetail: View {
                         Spacer()
                     }
                     .padding(.vertical, listPadding)
-                    
                 default:
-                    TaskDetailMainInfo(task: task)
-                        .padding(.vertical, listPadding)
-                    if let endTime = task.endTime {
-                        HStack {
-                            Image(systemName: "clock")
-                                .foregroundColor(.accentColor)
-                            Text(task.startTime...endTime)
-                        }
-                        .padding(.vertical, listPadding)
-                        Label(task.getDuration(), systemImage: "hourglass")
-                            .padding(.vertical, listPadding)
-                        Gauge(value: gaugePercentage) {
-                            Text("% of Workday")
-                        }
-                        .padding(.vertical, listPadding)
+                    Button("Copy Task Info") {
+                        let pasteboard = NSPasteboard.general
+                        pasteboard.declareTypes([.string], owner: nil)
+                        pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
                     }
-                    if let comment = task.statusComment {
-                        Label(comment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
-                            .padding(.vertical, listPadding)
-                    }
-                    Label(task.status.rawValue, systemImage: "info.square")
-                        .foregroundColor(task.status.color)
-                        .padding(.vertical, listPadding)
+                    .padding(.vertical)
                 }
-                Button("Copy Task Info") {
-                    let pasteboard = NSPasteboard.general
-                    pasteboard.declareTypes([.string], owner: nil)
-                    pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
-                }
-                .padding(.vertical)
             }
             .textSelection(.enabled)
             .sheet(isPresented: $showFinishSheet) {
@@ -130,4 +87,9 @@ struct TaskDetail: View {
 
 #Preview {
     TaskDetail(task: Task.sampleData[0])
+        .frame(height: 600)
+}
+#Preview {
+    TaskDetail(task: Task.sampleData[1])
+        .frame(height: 600)
 }

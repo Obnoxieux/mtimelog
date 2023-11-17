@@ -17,6 +17,8 @@
 		CA2064D32A485894007BACF4 /* MainTaskList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2064D22A485894007BACF4 /* MainTaskList.swift */; };
 		CA2064D52A4858B8007BACF4 /* TaskDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2064D42A4858B8007BACF4 /* TaskDetail.swift */; };
 		CA2064DA2A485D82007BACF4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2064D92A485D82007BACF4 /* Task.swift */; };
+		CA41BF7A2B075B14004353A8 /* TaskDetailTimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */; };
+		CA41BF7C2B07615D004353A8 /* TaskDetailStatusSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */; };
 		CA51F2432AFCCD7B00863E02 /* FocusedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */; };
 		CA51F2462AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */; };
 		CA51F2482AFCD16F00863E02 /* AddTaskMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */; };
@@ -55,6 +57,8 @@
 		CA2064D22A485894007BACF4 /* MainTaskList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTaskList.swift; sourceTree = "<group>"; };
 		CA2064D42A4858B8007BACF4 /* TaskDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetail.swift; sourceTree = "<group>"; };
 		CA2064D92A485D82007BACF4 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailTimeSection.swift; sourceTree = "<group>"; };
+		CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailStatusSection.swift; sourceTree = "<group>"; };
 		CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedValues.swift; sourceTree = "<group>"; };
 		CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkdayMenuBarButton.swift; sourceTree = "<group>"; };
 		CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskMenuBarButton.swift; sourceTree = "<group>"; };
@@ -106,8 +110,8 @@
 		CA088BD72A4A11B600A59D7C /* Task */ = {
 			isa = PBXGroup;
 			children = (
+				CA41BF782B075AE4004353A8 /* Detail */,
 				CA088BD82A4A11C600A59D7C /* TaskItem.swift */,
-				CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */,
 				CA51F2492AFD0F1800863E02 /* ComboBox.swift */,
 			);
 			path = Task;
@@ -187,6 +191,16 @@
 				CA2064D42A4858B8007BACF4 /* TaskDetail.swift */,
 			);
 			path = MainComponents;
+			sourceTree = "<group>";
+		};
+		CA41BF782B075AE4004353A8 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */,
+				CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */,
+				CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		CA51F2442AFCCE5E00863E02 /* MenuBar */ = {
@@ -310,6 +324,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA41BF7A2B075B14004353A8 /* TaskDetailTimeSection.swift in Sources */,
+				CA41BF7C2B07615D004353A8 /* TaskDetailStatusSection.swift in Sources */,
 				CA51F2482AFCD16F00863E02 /* AddTaskMenuBarButton.swift in Sources */,
 				CA7E0E212A4B608D000073EB /* AddNewWorkdaySheet.swift in Sources */,
 				CA51F24A2AFD0F1800863E02 /* ComboBox.swift in Sources */,
