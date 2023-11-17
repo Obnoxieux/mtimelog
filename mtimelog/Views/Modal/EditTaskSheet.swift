@@ -27,7 +27,7 @@ struct EditTaskSheet: View {
     let suggestionProvider = SuggestionProvider()
     
     private var formValid: Bool {
-        if projectID != "" && description != "" && task.startTime < endTime {
+        if projectID != "" && description != "" && startTime < endTime {
             return true
         } else {
             return false
