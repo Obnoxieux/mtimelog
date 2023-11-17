@@ -9,24 +9,23 @@ import SwiftUI
 import Charts
 
 struct WorkdayChart: View {
-    @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
+    @Binding var maximumValue: Int
     
-    var workday: Workday
+    var tasks: [Task]
     
     var body: some View {
         Chart {
-            ForEach(workday.tasks, id: \.id) { task in
-                let duration = task.getDurationAsInterval()
+            ForEach(tasks, id: \.id) { task in
                 BarMark (
                     x: .value("Time used", task.getDurationAsInterval() / 3600)
                 )
                 .foregroundStyle(by: .value("Project", task.projectID))
             }
         }
-        .chartXScale(domain: [0, hoursInWorkingDay])
+        .chartXScale(domain: [0, maximumValue])
     }
 }
 
 #Preview {
-    WorkdayChart(workday: Workday.sampleData[0])
+    WorkdayChart(maximumValue: .constant(8), tasks: Task.sampleData)
 }

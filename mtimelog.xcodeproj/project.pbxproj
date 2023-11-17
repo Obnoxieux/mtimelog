@@ -19,6 +19,7 @@
 		CA2064DA2A485D82007BACF4 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2064D92A485D82007BACF4 /* Task.swift */; };
 		CA41BF7A2B075B14004353A8 /* TaskDetailTimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */; };
 		CA41BF7C2B07615D004353A8 /* TaskDetailStatusSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */; };
+		CA41BF7E2B077104004353A8 /* WeeklyAggregatedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF7D2B077104004353A8 /* WeeklyAggregatedChart.swift */; };
 		CA51F2432AFCCD7B00863E02 /* FocusedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */; };
 		CA51F2462AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */; };
 		CA51F2482AFCD16F00863E02 /* AddTaskMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */; };
@@ -59,6 +60,7 @@
 		CA2064D92A485D82007BACF4 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailTimeSection.swift; sourceTree = "<group>"; };
 		CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailStatusSection.swift; sourceTree = "<group>"; };
+		CA41BF7D2B077104004353A8 /* WeeklyAggregatedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyAggregatedChart.swift; sourceTree = "<group>"; };
 		CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedValues.swift; sourceTree = "<group>"; };
 		CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkdayMenuBarButton.swift; sourceTree = "<group>"; };
 		CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskMenuBarButton.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				CA79A1A82AFE819A0020BD6D /* WorkdayCollection.swift */,
 				CA8CAB112B06664D00BD24FD /* WorkdayChart.swift */,
 				CA8CAB132B0679AC00BD24FD /* WeeklyWorkdayChartList.swift */,
+				CA41BF7D2B077104004353A8 /* WeeklyAggregatedChart.swift */,
 			);
 			path = Workday;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				CA2064DA2A485D82007BACF4 /* Task.swift in Sources */,
 				CAA1CE0D2AEBB87F00E975B6 /* ReportGenerator.swift in Sources */,
 				CA51F2432AFCCD7B00863E02 /* FocusedValues.swift in Sources */,
+				CA41BF7E2B077104004353A8 /* WeeklyAggregatedChart.swift in Sources */,
 				CA55B5C12B023144002C62EE /* TextSuggestion.swift in Sources */,
 				CA79A1A72AFE699E0020BD6D /* DateTimeUtility.swift in Sources */,
 				CA598E2E2AE96633003DD173 /* GeneralSettingsTab.swift in Sources */,

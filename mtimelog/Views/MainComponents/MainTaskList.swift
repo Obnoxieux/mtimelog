@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct MainTaskList: View {
+    @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
     @AppStorage("showTimesInReport") var showTimesInReport = true
     @Environment(\.modelContext) private var modelContext
     @State var showAddPopover = false
@@ -80,7 +81,7 @@ struct MainTaskList: View {
                     Text("Once this working day has some tasks, you will see a chart here.")
                         .padding()
                 } else {
-                    WorkdayChart(workday: workday)
+                    WorkdayChart(maximumValue: $hoursInWorkingDay, tasks: workday.tasks)
                         .padding()
                 }
             }

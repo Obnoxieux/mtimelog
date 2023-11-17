@@ -1,16 +1,19 @@
 //
-//  WeeklyWorkdayChartList.swift
+//  WeeklyAggregatedChart.swift
 //  mtimelog
 //
-//  Created by David Battefeld on 16.11.23.
+//  Created by David Battefeld on 17.11.23.
 //
 
 import SwiftUI
 import SwiftData
 
-struct WeeklyWorkdayChartList: View {
+struct WeeklyAggregatedChart: View {
     @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
     @Query var workdays: [Workday]
+    
+    @State var totalWeeklyHours = 0
+    @State var totalTasks: [Task] = []
     
     init(
         startDate: Date,
@@ -27,16 +30,19 @@ struct WeeklyWorkdayChartList: View {
     
     var body: some View {
         List {
-            Section(header: Text("Statistical data for all working days in the week")) {
-                ForEach(workdays, id: \.id) {
-                    WorkdayChart(maximumValue: $hoursInWorkingDay, tasks: $0.tasks)
-                        .padding()
-                }
+            Section(header: Text("Aggregated statistical data for the whole week")) {
+                WorkdayChart(maximumValue: $totalWeeklyHours, tasks: totalTasks)
+            }
+        }
+        .task {
+            totalWeeklyHours = workdays.count * hoursInWorkingDay
+            for workday in workdays {
+                totalTasks.append(contentsOf: workday.tasks)
             }
         }
     }
 }
 
 #Preview {
-    WeeklyWorkdayChartList(startDate: .now, endDate: .now)
+    WeeklyAggregatedChart(startDate: .now, endDate: .now)
 }
