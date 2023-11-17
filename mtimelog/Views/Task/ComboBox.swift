@@ -72,7 +72,7 @@ extension ComboBox
         }
         
         
-        func controlTextDidEndEditing(_ obj: Notification)
+        func controlTextDidChange(_ obj: Notification)
         {
             if let textField = obj.object as? NSTextField
             {
