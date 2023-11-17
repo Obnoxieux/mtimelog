@@ -21,67 +21,69 @@ struct TaskDetail: View {
     let listPadding: CGFloat = 7
     
     var body: some View {
-        if taskDeleted == false {
-            List {
-                TaskDetailMainInfo(task: task)
-                TaskDetailTimeSection(task: task)
-                TaskDetailStatusSection(task: task)
-                switch task.status {
-                case .ongoing:
-                    HStack {
-                        Spacer()
-                        Button("Finish Task") {
-                            showFinishSheet = true
+        let gaugePercentage = task.calculatePercentageOfWorkingDay(hoursInWorkingDay: hoursInWorkingDay)
+        ZStack {
+            if taskDeleted == false {
+                VStack {
+                    Grid {
+                        TaskDetailMainInfo(task: task)
+                        GridRow {
+                            TaskDetailTimeSection(task: task)
+                                .gridCellAnchor(.center)
+                                .padding(.vertical)
+                            Gauge(value: gaugePercentage) {
+                                Text("% of Workday")
+                            }
+                            .padding()
+                            .modifier(TaskDetailCardBackground())
                         }
-                        .buttonStyle(.borderedProminent)
-                        Spacer()
+                        TaskDetailStatusSection(task: task)
+                        TaskActionButtons(task: task, showFinishSheet: $showFinishSheet)
+                            .padding(.vertical)
                     }
-                    .padding(.vertical, listPadding)
-                default:
-                    Button("Copy Task Info") {
-                        let pasteboard = NSPasteboard.general
-                        pasteboard.declareTypes([.string], owner: nil)
-                        pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
-                    }
-                    .padding(.vertical)
-                }
-            }
-            .textSelection(.enabled)
-            .sheet(isPresented: $showFinishSheet) {
-                EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.finish)
-            }
-            .sheet(isPresented: $showEditSheet) {
-                EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.edit)
-            }
-            .confirmationDialog("Confirm Deletion", isPresented: $showingDeleteConfirmationDialog) {
-                Button("Delete Task", role: .destructive) {
-                    taskDeleted = true
-                    modelContext.delete(task)
-                }
-                Button("Cancel", role: .cancel) {}
-            } message: {
-                Text("This task will be deleted from its corresponding working day.")
-            }
-            .toolbar {
-                ToolbarItemGroup {
+                    .padding()
                     Spacer()
-                    Button {
-                        showEditSheet = true
-                    } label: {
-                        Label("Edit", systemImage: "pencil.and.list.clipboard")
-                            .labelStyle(.titleAndIcon)
+                }
+                
+                .textSelection(.enabled)
+                .sheet(isPresented: $showFinishSheet) {
+                    EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.finish)
+                }
+                .sheet(isPresented: $showEditSheet) {
+                    EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.edit)
+                }
+                .confirmationDialog("Confirm Deletion", isPresented: $showingDeleteConfirmationDialog) {
+                    Button("Delete Task", role: .destructive) {
+                        taskDeleted = true
+                        modelContext.delete(task)
                     }
-                    Button {
-                        showingDeleteConfirmationDialog = true
-                    } label: {
-                        Label("Delete", systemImage: "trash")
-                            .labelStyle(.titleAndIcon)
+                    Button("Cancel", role: .cancel) {}
+                } message: {
+                    Text("This task will be deleted from its corresponding working day.")
+                }
+                .toolbar {
+                    ToolbarItemGroup {
+                        Spacer()
+                        Button {
+                            showEditSheet = true
+                        } label: {
+                            Label("Edit", systemImage: "pencil.and.list.clipboard")
+                                .labelStyle(.titleAndIcon)
+                        }
+                        Button {
+                            showingDeleteConfirmationDialog = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                                .labelStyle(.titleAndIcon)
+                        }
                     }
                 }
+            } else {
+                ContentUnavailableView("No Task selected", systemImage: "note.text")
             }
-        } else {
-            ContentUnavailableView("No Task selected", systemImage: "note.text")
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(VisualEffect())
     }
 }
 

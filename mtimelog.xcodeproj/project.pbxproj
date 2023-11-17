@@ -20,6 +20,8 @@
 		CA41BF7A2B075B14004353A8 /* TaskDetailTimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */; };
 		CA41BF7C2B07615D004353A8 /* TaskDetailStatusSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */; };
 		CA41BF7E2B077104004353A8 /* WeeklyAggregatedChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF7D2B077104004353A8 /* WeeklyAggregatedChart.swift */; };
+		CA41BF812B07865F004353A8 /* TaskDetailCardBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF802B07865F004353A8 /* TaskDetailCardBackground.swift */; };
+		CA41BF832B079113004353A8 /* TaskActionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA41BF822B079113004353A8 /* TaskActionButtons.swift */; };
 		CA51F2432AFCCD7B00863E02 /* FocusedValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */; };
 		CA51F2462AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */; };
 		CA51F2482AFCD16F00863E02 /* AddTaskMenuBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */; };
@@ -61,6 +63,8 @@
 		CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailTimeSection.swift; sourceTree = "<group>"; };
 		CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailStatusSection.swift; sourceTree = "<group>"; };
 		CA41BF7D2B077104004353A8 /* WeeklyAggregatedChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyAggregatedChart.swift; sourceTree = "<group>"; };
+		CA41BF802B07865F004353A8 /* TaskDetailCardBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailCardBackground.swift; sourceTree = "<group>"; };
+		CA41BF822B079113004353A8 /* TaskActionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskActionButtons.swift; sourceTree = "<group>"; };
 		CA51F2422AFCCD7B00863E02 /* FocusedValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedValues.swift; sourceTree = "<group>"; };
 		CA51F2452AFCCE7F00863E02 /* AddWorkdayMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkdayMenuBarButton.swift; sourceTree = "<group>"; };
 		CA51F2472AFCD16F00863E02 /* AddTaskMenuBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskMenuBarButton.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 		CA2064CC2A4850C0007BACF4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CA41BF7F2B078613004353A8 /* ViewModifiers */,
 				CA51F2442AFCCE5E00863E02 /* MenuBar */,
 				CA598E2A2AE9660F003DD173 /* Settings */,
 				CA598E272AE965B7003DD173 /* Windows */,
@@ -201,8 +206,17 @@
 				CABE83F22A58755600B24DCC /* TaskDetailMainInfo.swift */,
 				CA41BF792B075B14004353A8 /* TaskDetailTimeSection.swift */,
 				CA41BF7B2B07615D004353A8 /* TaskDetailStatusSection.swift */,
+				CA41BF822B079113004353A8 /* TaskActionButtons.swift */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		CA41BF7F2B078613004353A8 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				CA41BF802B07865F004353A8 /* TaskDetailCardBackground.swift */,
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 		CA51F2442AFCCE5E00863E02 /* MenuBar */ = {
@@ -349,6 +363,7 @@
 				CA55B5C12B023144002C62EE /* TextSuggestion.swift in Sources */,
 				CA79A1A72AFE699E0020BD6D /* DateTimeUtility.swift in Sources */,
 				CA598E2E2AE96633003DD173 /* GeneralSettingsTab.swift in Sources */,
+				CA41BF832B079113004353A8 /* TaskActionButtons.swift in Sources */,
 				CA55B5BF2B02289B002C62EE /* TextSuggestionsTab.swift in Sources */,
 				CABE83F12A58601D00B24DCC /* AddTaskPopover.swift in Sources */,
 				CA51F24C2AFD2C3600863E02 /* SuggestionProvider.swift in Sources */,
@@ -360,6 +375,7 @@
 				CADB248E2AEA54E90068DD6D /* DateOption.swift in Sources */,
 				CA088BDB2A4A127600A59D7C /* TaskStatus.swift in Sources */,
 				CA75B66D2AFB7E380014EE24 /* ExportSettingsTab.swift in Sources */,
+				CA41BF812B07865F004353A8 /* TaskDetailCardBackground.swift in Sources */,
 				CAFD51AE2A4A080A004318EA /* Workday.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

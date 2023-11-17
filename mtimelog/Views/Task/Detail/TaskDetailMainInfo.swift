@@ -11,20 +11,18 @@ struct TaskDetailMainInfo: View {
     var task: Task
     
     var body: some View {
-        Label(task.projectID, systemImage: "tray.full")
-            .bold()
-            .labelStyle(.titleOnly)
-            .textSelection(.enabled)
         HStack {
-            Label(task.taskDescription ?? "No description provided", systemImage: "list.bullet.clipboard")
-                .textSelection(.enabled)
-            Spacer()
-            Button("Copy") {
-                let pasteboard = NSPasteboard.general
-                pasteboard.declareTypes([.string], owner: nil)
-                pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: false), forType: .string)
+            VStack(alignment: .leading) {
+                Label(task.projectID, systemImage: "tray.full")
+                    .bold()
+                // .labelStyle(.titleOnly)
+                Label(task.taskDescription ?? "No description provided", systemImage: "list.bullet.clipboard")
             }
+            Spacer()
         }
+        .textSelection(.enabled)
+        .padding()
+        .modifier(TaskDetailCardBackground())
     }
 }
 

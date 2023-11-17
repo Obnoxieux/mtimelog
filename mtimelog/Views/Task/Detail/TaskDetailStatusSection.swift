@@ -10,11 +10,20 @@ import SwiftUI
 struct TaskDetailStatusSection: View {
     var task: Task
     var body: some View {
-        if let comment = task.statusComment {
-            Label(comment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
+        HStack {
+            VStack(alignment: .leading, spacing: 10) {
+                if let comment = task.statusComment {
+                    if !comment.isEmpty {
+                        Label(comment, systemImage: task.status == .blocked ? "exclamationmark.bubble" : "bubble.left")
+                    }
+                }
+                Label(task.status.rawValue, systemImage: "info.square")
+                    .foregroundColor(task.status.color)
+            }
+            Spacer()
         }
-        Label(task.status.rawValue, systemImage: "info.square")
-            .foregroundColor(task.status.color)
+        .padding()
+        .modifier(TaskDetailCardBackground())
     }
 }
 
