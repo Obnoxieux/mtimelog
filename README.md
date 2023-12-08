@@ -9,7 +9,7 @@ Unlike some bigger projects, this aims to be a very small utility application th
 
 
 ## Who this project is for
-This project is intended for anyone who wants to track their time spent on tasks over the course of a constrained working day, review this data and export it in various text formats.
+This project is intended for anyone who wants to track their time spent on tasks over the course of a working day, review this data and export it in various text formats.
 
 
 ## Project dependencies
@@ -23,7 +23,7 @@ This project is intended for anyone who wants to track their time spent on tasks
 
 
 ### Configure
-At this point there is not much possible user configuration, but a few essential settings can be found in the macOS Settings window (Command + ,).
+At this point there aren't many user-configurable options, but a few essential settings can be found in the macOS Settings window (Command + ,).
 
 Currently, the app does not need special entitlements to compile.
 
