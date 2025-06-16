@@ -21,4 +21,13 @@ enum TaskStatus: String, Codable {
         case .completed: return .green
         }
     }
+    
+    var emoji: String {
+        switch self {
+            case .ongoing: return "🕒"
+            case .inProgress: return "⏳"
+            case .blocked: return "🚫"
+            case .completed: return "✅"
+        }
+    }
 }

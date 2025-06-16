@@ -36,7 +36,7 @@ class ReportGenerator {
 
 \(includeDuration ? task.getDurationDataForExport() : "")
 Status:
-\(task.status)
+\(task.status.emoji) \(task.status)
 \(includeStatusComment(task: task))
 _____________________________________________________
 """
