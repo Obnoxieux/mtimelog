@@ -17,7 +17,7 @@ class ReportGenerator {
     }
     
     func generateReport() -> String {
-        var fullReport = "Status for Working Day \(workday.date.formatted(date: .numeric, time: .omitted))'\n\n"
+        var fullReport = "Status for Working Day \(workday.date.formatted(date: .numeric, time: .omitted))\n\n"
         
         for task in workday.tasks where task.status != .ongoing {
             let taskReport = reportSingleTask(task: task)
