@@ -34,10 +34,18 @@ struct NavigationBar: View {
             Spacer()
             Section(header: Text("Stats")) {
                 NavigationLink(destination: WeeklyWorkdayChartList(startDate: startDate, endDate: endDate), label: {
-                    Text("Individual Days")
+                    Label {
+                        Text("Individual Days")
+                    } icon: {
+                        Image(systemName: "chart.bar")
+                    }
                 })
                 NavigationLink(destination: WeeklyAggregatedChart(startDate: startDate, endDate: endDate), label: {
-                    Text("Aggregated")
+                    Label {
+                        Text("Aggregated")
+                    } icon: {
+                        Image(systemName: "chart.bar.xaxis")
+                    }
                 })
             }
         }
