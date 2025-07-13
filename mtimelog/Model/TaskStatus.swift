@@ -24,10 +24,10 @@ enum TaskStatus: String, Codable {
     
     var emoji: String {
         switch self {
-            case .ongoing: return "🕒"
-            case .inProgress: return "⏳"
-            case .blocked: return "🚫"
-            case .completed: return "✅"
+            case .ongoing: return "🔵"
+            case .inProgress: return "🟡"
+            case .blocked: return "🔴"
+            case .completed: return "🟢"
         }
     }
 }
