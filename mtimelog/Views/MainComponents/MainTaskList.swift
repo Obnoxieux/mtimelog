@@ -5,30 +5,36 @@
 //  Created by David Battefeld on 25.06.23.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct MainTaskList: View {
     @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
     @AppStorage("showTimesInReport") var showTimesInReport = true
+    @AppStorage("reportEmailRecipient") var reportEmailRecipient = ""
     @Environment(\.modelContext) private var modelContext
-    @State var showAddPopover = false
+    @State private var showAddPopover = false
+    @State private var showingEmailReportConfirmation = false
     @State var searchText = ""
     @State var selectedTask: Task? = nil
     @Query var tasks: [Task]
     @Bindable var workday: Workday
-    
+
     let pasteboard = NSPasteboard.general
-    
+
     var filteredTasks: [Task] {
         guard searchText.isEmpty == false else { return tasks }
         return tasks.filter {
-            $0.projectID.localizedStandardContains(searchText) ||
-            ($0.taskDescription ?? "").localizedStandardContains(searchText) ||
-            ($0.statusComment ?? "").localizedStandardContains(searchText)
+            $0.projectID.localizedStandardContains(searchText)
+                || ($0.taskDescription ?? "").localizedStandardContains(
+                    searchText
+                )
+                || ($0.statusComment ?? "").localizedStandardContains(
+                    searchText
+                )
         }
     }
-    
+
     init(workday: Workday) {
         self.workday = workday
         pasteboard.declareTypes([.string], owner: nil)
@@ -36,31 +42,52 @@ struct MainTaskList: View {
         let predicate = #Predicate<Task> { task in
             task.workday?.id == id
         }
-        _tasks = Query(filter: predicate, sort: \Task.startTime, animation: .smooth)
+        _tasks = Query(
+            filter: predicate,
+            sort: \Task.startTime,
+            animation: .smooth
+        )
     }
-    
+
     var body: some View {
         List {
             Section(header: Text("Tasks")) {
                 if tasks.isEmpty {
-                    Label("This working day does not have any tasks yet.", systemImage: "tray")
-                        .padding()
+                    Label(
+                        "This working day does not have any tasks yet.",
+                        systemImage: "tray"
+                    )
+                    .padding()
                 }
                 ForEach(filteredTasks, id: \.id) { (task) in
-                    NavigationLink(destination: TaskDetail(task: task), label: {
-                        TaskItem(task: task)
-                            .listRowSeparatorTint(task.status.color)
-                    })
+                    NavigationLink(
+                        destination: TaskDetail(task: task),
+                        label: {
+                            TaskItem(task: task)
+                                .listRowSeparatorTint(task.status.color)
+                        }
+                    )
                     .id(UUID())
                     .contextMenu {
                         Button("Copy Project ID") {
-                            pasteboard.setString(task.projectID, forType: .string)
+                            pasteboard.setString(
+                                task.projectID,
+                                forType: .string
+                            )
                         }
                         Button("Copy Description") {
-                            pasteboard.setString(task.taskDescription ?? "", forType: .string)
+                            pasteboard.setString(
+                                task.taskDescription ?? "",
+                                forType: .string
+                            )
                         }
                         Button("Copy ID + Description") {
-                            pasteboard.setString(task.copyTaskTextToClipboard(includeProjectID: true), forType: .string)
+                            pasteboard.setString(
+                                task.copyTaskTextToClipboard(
+                                    includeProjectID: true
+                                ),
+                                forType: .string
+                            )
                         }
                         Divider()
                         Button("Edit Task") {
@@ -78,35 +105,64 @@ struct MainTaskList: View {
             }
             Section(header: Text("Stats")) {
                 if workday.tasks.isEmpty {
-                    Text("Once this working day has some tasks, you will see a chart here.")
-                        .padding()
+                    Text(
+                        "Once this working day has some tasks, you will see a chart here."
+                    )
+                    .padding()
                 } else {
-                    WorkdayChart(maximumValue: $hoursInWorkingDay, tasks: workday.tasks)
-                        .padding()
+                    WorkdayChart(
+                        maximumValue: $hoursInWorkingDay,
+                        tasks: workday.tasks
+                    )
+                    .padding()
                 }
             }
         }
         .listStyle(.plain)
-        .navigationTitle("Tasks for \(workday.date.formatted(date: .long, time: .omitted))")
+        .navigationTitle(
+            "Tasks for \(workday.date.formatted(date: .long, time: .omitted))"
+        )
         .searchable(text: $searchText)
         .animation(.easeIn, value: tasks)
-        
+
         .sheet(item: self.$selectedTask) { selectedTask in
             EditTaskSheet(task: selectedTask, mode: EditTaskSheet.EditMode.edit)
         }
-        
+
         .toolbar {
-            ToolbarItemGroup() {
+            ToolbarItemGroup {
                 Button {
                     showAddPopover = true
                 } label: {
                     Label("Add Task", systemImage: "plus")
                         .labelStyle(.titleAndIcon)
                 }
-                ShareLink(item: workday.generateReport(includeDuration: showTimesInReport)) {
-                    Label("Daily Report", systemImage: "square.and.arrow.up")
+
+                ShareLink(
+                    item: workday.generateReport(
+                        includeDuration: showTimesInReport
+                    )
+                ) {
+                    Label("Share", systemImage: "square.and.arrow.up")
                         .labelStyle(.titleAndIcon)
                 }
+
+                Button {
+                    showingEmailReportConfirmation.toggle()
+                } label: {
+                    Label("Daily Report", systemImage: "envelope")
+                        .labelStyle(.titleAndIcon)
+                }
+                
+                .confirmationDialog("Send daily report", isPresented: $showingEmailReportConfirmation) {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Send") {
+                        // TODO: do stuff
+                    }
+                } message: {
+                    Text("Send daily report via email to \(reportEmailRecipient)?")
+                }
+                
                 .popover(isPresented: $showAddPopover, arrowEdge: .bottom) {
                     AddTaskPopover(workday: workday)
                         .frame(minHeight: 300)
@@ -115,7 +171,7 @@ struct MainTaskList: View {
         }
         .focusedSceneValue(\.addTask, $showAddPopover)
     }
-    
+
     func deleteTask(_ task: Task) {
         modelContext.delete(task)
         do {
@@ -124,7 +180,7 @@ struct MainTaskList: View {
             print("couldn't immediately save deletion")
         }
     }
-    
+
     func deleteTaskFromIndexSet(_ indexSet: IndexSet) {
         for index in indexSet {
             let task = tasks[index]
