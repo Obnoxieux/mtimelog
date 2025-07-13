@@ -157,7 +157,7 @@ struct MainTaskList: View {
                 .confirmationDialog("Send daily report", isPresented: $showingEmailReportConfirmation) {
                     Button("Cancel", role: .cancel) {}
                     Button("Send") {
-                        // TODO: do stuff
+                        workday.sendReportEmail(includeDuration: showTimesInReport)
                     }
                 } message: {
                     Text("Send daily report via email to \(reportEmailRecipient)?")

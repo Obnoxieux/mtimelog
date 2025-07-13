@@ -46,6 +46,11 @@ final class Workday: Codable {
         return reportGenerator.generateReport()
     }
     
+    func sendReportEmail(includeDuration: Bool) {
+        let reportGenerator = ReportGenerator(workday: self, includeDuration: includeDuration)
+        reportGenerator.sendReportEmailDirectly()
+    }
+    
     func generateExportText() -> String {
         var taskTexts = ""
         for task in tasks {
