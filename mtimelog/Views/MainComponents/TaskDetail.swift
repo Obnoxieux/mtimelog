@@ -13,53 +13,66 @@ struct TaskDetail: View {
     @State var showEditSheet = false
     @State var showingDeleteConfirmationDialog = false
     @Environment(\.modelContext) private var modelContext
-    
+
     @State private var taskDeleted = false
-    
+
     @Bindable var task: Task
-    
+
     let listPadding: CGFloat = 7
-    
+
     var body: some View {
-        let gaugePercentage = task.calculatePercentageOfWorkingDay(hoursInWorkingDay: hoursInWorkingDay)
+        let gaugePercentage = task.calculatePercentageOfWorkingDay(
+            hoursInWorkingDay: hoursInWorkingDay
+        )
         ZStack {
             if taskDeleted == false {
-                VStack {
-                    Grid {
-                        TaskDetailMainInfo(task: task)
-                        GridRow {
-                            TaskDetailTimeSection(task: task)
-                                .gridCellAnchor(.center)
-                                .padding(.vertical)
-                            Gauge(value: gaugePercentage) {
-                                Text("% of Workday")
-                            }
-                            .padding()
-                            .modifier(TaskDetailCardBackground())
+                VStack(alignment: .leading, spacing: 15) {
+                    TaskDetailMainInfo(task: task)
+
+                    TaskDetailTimeSection(task: task)
+
+                    Gauge(value: gaugePercentage) {
+                        Label {
+                            Text("% of Workday")
+                        } icon: {
+                            Image(systemName: "clock")
+                                .foregroundStyle(.indigo)
                         }
-                        TaskDetailStatusSection(task: task)
-                        TaskActionButtons(task: task, showFinishSheet: $showFinishSheet)
-                            .padding(.vertical)
                     }
-                    .padding()
+
+                    TaskDetailStatusSection(task: task)
+                    TaskActionButtons(
+                        task: task,
+                        showFinishSheet: $showFinishSheet
+                    )
+                    .padding(.vertical)
                     Spacer()
                 }
-                
+                .padding()
+
                 .textSelection(.enabled)
                 .sheet(isPresented: $showFinishSheet) {
-                    EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.finish)
+                    EditTaskSheet(
+                        task: task,
+                        mode: EditTaskSheet.EditMode.finish
+                    )
                 }
                 .sheet(isPresented: $showEditSheet) {
                     EditTaskSheet(task: task, mode: EditTaskSheet.EditMode.edit)
                 }
-                .confirmationDialog("Confirm Deletion", isPresented: $showingDeleteConfirmationDialog) {
+                .confirmationDialog(
+                    "Confirm Deletion",
+                    isPresented: $showingDeleteConfirmationDialog
+                ) {
                     Button("Delete Task", role: .destructive) {
                         taskDeleted = true
                         modelContext.delete(task)
                     }
                     Button("Cancel", role: .cancel) {}
                 } message: {
-                    Text("This task will be deleted from its corresponding working day.")
+                    Text(
+                        "This task will be deleted from its corresponding working day."
+                    )
                 }
                 .toolbar {
                     ToolbarItemGroup {
@@ -67,8 +80,11 @@ struct TaskDetail: View {
                         Button {
                             showEditSheet = true
                         } label: {
-                            Label("Edit", systemImage: "pencil.and.list.clipboard")
-                                .labelStyle(.titleAndIcon)
+                            Label(
+                                "Edit",
+                                systemImage: "pencil.and.list.clipboard"
+                            )
+                            .labelStyle(.titleAndIcon)
                         }
                         Button {
                             showingDeleteConfirmationDialog = true
@@ -79,11 +95,14 @@ struct TaskDetail: View {
                     }
                 }
             } else {
-                ContentUnavailableView("No Task selected", systemImage: "note.text")
+                ContentUnavailableView(
+                    "No Task selected",
+                    systemImage: "note.text"
+                )
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(VisualEffect())
+        .background(.thickMaterial)
     }
 }
 

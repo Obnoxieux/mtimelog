@@ -38,7 +38,6 @@ struct TaskActionButtons: View {
             Spacer()
         }
         .padding()
-        .modifier(TaskDetailCardBackground())
     }
 }
 

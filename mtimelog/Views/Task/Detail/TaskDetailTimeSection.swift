@@ -9,34 +9,52 @@ import SwiftUI
 
 struct TaskDetailTimeSection: View {
     @AppStorage("hoursInWorkingDay") var hoursInWorkingDay = 8
-    
+
     var task: Task
-    
+
     var body: some View {
-        VStack {
-            switch task.status {
-            case .ongoing:
-                HStack {
-                    Text("Started: ") + Text(task.startTime, style: .time).font(.headline)
-                    Spacer()
-                    Text(task.startTime, style: .timer)
-                        .font(.headline)
+        switch task.status {
+        case .ongoing:
+            Label {
+                Text("Started: ")
+                    + Text(task.startTime, style: .time).font(.headline)
+            } icon: {
+                clockImage
+            }
+
+            Label {
+                Text(task.startTime, style: .timer)
+                    .font(.headline)
+            } icon: {
+                hourGlassImage
+            }
+        default:
+            if let endTime = task.endTime {
+                Label {
+                    Text(task.startTime...endTime)
+                } icon: {
+                    clockImage
                 }
-            default:
-                if let endTime = task.endTime {
-                    HStack {
-                        HStack {
-                            Image(systemName: "clock")
-                            Text(task.startTime...endTime)
-                        }
-                        Spacer()
-                        Label(task.getDuration(), systemImage: "hourglass")
-                    }
+                
+                Label {
+                    Text(task.getDuration())
+                } icon: {
+                    hourGlassImage
                 }
             }
         }
-        .padding(28)
-        .modifier(TaskDetailCardBackground())
+    }
+
+    private var clockImage: some View {
+        Image(systemName: "clock")
+            .foregroundStyle(.indigo)
+            .padding(.leading, 2)
+    }
+
+    private var hourGlassImage: some View {
+        Image(systemName: "hourglass")
+            .foregroundStyle(.indigo)
+            .padding(.leading, 4)
     }
 }
 
