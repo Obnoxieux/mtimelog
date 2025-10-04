@@ -17,18 +17,32 @@
           ],
           "glass" : true,
           "image-name" : "effects.svg",
-          "name" : "effects"
+          "name" : "effects",
+          "position" : {
+            "scale" : 0.9,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
         },
         {
           "glass" : true,
           "image-name" : "yellow.svg",
-          "name" : "yellow"
+          "name" : "yellow",
+          "position" : {
+            "scale" : 0.9,
+            "translation-in-points" : [
+              0,
+              0
+            ]
+          }
         },
         {
           "image-name" : "base.svg",
           "name" : "base",
           "position" : {
-            "scale" : 1,
+            "scale" : 0.9,
             "translation-in-points" : [
               0,
               0
