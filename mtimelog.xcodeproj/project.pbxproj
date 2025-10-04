@@ -248,7 +248,7 @@
 		CA2064CA2A484F45007BACF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = mtimelogApp;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = mtimelog/mtimelog.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -282,7 +282,7 @@
 		CA2064CB2A484F45007BACF4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = mtimelogApp;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = mtimelog/mtimelog.entitlements;
 				CODE_SIGN_STYLE = Automatic;

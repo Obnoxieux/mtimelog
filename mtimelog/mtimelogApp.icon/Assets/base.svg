@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(7.61785,0,0,7.61785,24.4575,24.4575)">
+        <g>
+            <path d="M23.36,116.32L23.36,108.9C30.76,107 91.22,108.9 104.64,108.9L104.64,116.32C104.64,120.56 86.44,124 64,124C41.56,124 23.36,120.56 23.36,116.32Z" style="fill:rgb(139,87,56);fill-rule:nonzero;"/>
+            <ellipse cx="64" cy="108.48" rx="40.64" ry="7.68" style="fill:rgb(255,177,122);"/>
+            <ellipse cx="64" cy="108.48" rx="40.64" ry="7.68" style="fill:rgb(204,133,82);"/>
+            <path d="M69.96,65.49C69.21,65.18 68.89,64.57 68.89,63.76C68.89,62.95 69.14,62.37 69.87,62.12C74.48,60.26 97.64,51.39 97.64,23.76L97.46,18.94L30.48,18.86L30.36,23.93C30.36,50.72 53.44,60.18 58.04,62.04C58.79,62.35 59.26,62.86 59.26,63.77C59.26,64.68 58.87,65.16 58.13,65.41C53.52,67.27 30.36,76.14 30.36,103.77C30.48,106.89 32.66,109.55 35.7,110.27C40.74,111.46 50.08,112.84 66.23,112.84C80.14,112.84 87.93,111.83 92.26,110.81C95.34,110.08 97.55,107.37 97.62,104.21L97.63,103.6C97.64,76.81 74.57,67.35 69.96,65.49Z" style="fill:rgb(129,212,250);fill-opacity:0.75;fill-rule:nonzero;"/>
+            <path d="M97.46,18.94L30.48,18.86L30.37,23.38C30.37,23.38 37.62,27.1 64,27.1C90.38,27.1 97.63,23.38 97.63,23.38L97.46,18.94Z" style="fill:rgb(29,68,179);fill-opacity:0.39;fill-rule:nonzero;"/>
+            <path d="M23.36,17.94L23.36,10.07C30.54,9.11 94.27,10.07 104.64,10.07L104.64,17.94C104.64,21.3 86.44,24.02 64,24.02C41.56,24.02 23.36,21.3 23.36,17.94Z" style="fill:rgb(139,87,56);fill-rule:nonzero;"/>
+            <ellipse cx="64" cy="10.08" rx="40.64" ry="6.08" style="fill:rgb(204,133,82);"/>
+        </g>
+    </g>
+</svg>
